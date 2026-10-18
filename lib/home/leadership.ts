@@ -1,19 +1,14 @@
-// Structured data for flagship engineering divisions and showcase cards.
+// Structured data for flagship showcase cards (image-led editorial layout).
 
-export interface LeadershipMessage {
+export interface LeadershipCardItem {
   id: string;
   index: string;
-  roleTag: string;
   title: string;
-  quote: string;
-  name: string;
-  designation: string;
-  imageSrc: string;
-  imageAlt: string;
+  line: string;
+  category: string;
+  image?: string;
+  imageAlt?: string;
   href: string;
-  cardBg: string;
-  accentColor: string;
-  borderAccent: string;
 }
 
 export interface LeadershipSectionData {
@@ -21,63 +16,55 @@ export interface LeadershipSectionData {
   sectionTag: string;
   heading: string;
   subheading: string;
-  messages: LeadershipMessage[];
+  cards: LeadershipCardItem[];
 }
 
 export const LEADERSHIP_SECTION_DATA: LeadershipSectionData = {
   sectionIndex: "02",
-  sectionTag: "ENGINEERING DISCIPLINES",
-  heading: "Bespoke Digital Divisions",
+  sectionTag: "FLAGSHIP DISCIPLINES",
+  heading: "Architectural Showcase",
   subheading:
-    "Architecture, physics-based motion, and high-conversion editorial commerce engineered for maximum brand prestige.",
-  messages: [
+    "Tactile engineering, bespoke kinetic fabrication, and performance apparel designed for extreme environments.",
+  cards: [
     {
-      id: "paddock-os",
+      id: "kinetic-truss",
       index: "01",
-      roleTag: "DIVISION 01 // RACING",
-      title: "Trackside & Paddock Digital Operating System",
-      quote:
-        "Full-fidelity race weekend telemetry, real-time pit strategy dashboards, and live partner integration. Engineered to command seven-figure brand sponsorships and captivate VIP paddock hospitality.",
-      name: "PADDOCK OS",
-      designation: "Dynamic Telemetry & Partner Platform",
-      imageSrc: "/template/DSC03294.jpg.jpeg",
-      imageAlt: "High-performance racing vehicle",
-      href: "#specs",
-      cardBg: "bg-[#0b1329]",
-      accentColor: "#38bdf8",
-      borderAccent: "border-white/10",
-    },
-    {
-      id: "lookbook-engine",
-      index: "02",
-      roleTag: "DIVISION 02 // COMMERCE",
-      title: "High-Fashion Editorial Merch & Capsule Drops",
-      quote:
-        "Limited-edition apparel drops presented through brutalist typography, responsive media scrubbing, and frictionless one-click Stripe payment links. Designed to turn casual enthusiasts into loyal brand patrons.",
-      name: "LOOKBOOK ENGINE",
-      designation: "Luxury Apparel & Merch Storefront",
-      imageSrc: "/template/👑.jpeg",
-      imageAlt: "Editorial fashion collection",
-      href: "/merch",
-      cardBg: "bg-[#18111e]",
-      accentColor: "#e879f9",
-      borderAccent: "border-white/10",
-    },
-    {
-      id: "monolith-atelier",
-      index: "03",
-      roleTag: "DIVISION 03 // BESPOKE",
-      title: "Monolithic Spatial Architecture & Hardware Showcase",
-      quote:
-        "Tailored for bespoke automotive builders, supercar privateers, and architectural ateliers who demand digital presentation that matches the tactile craft and uncompromised precision of their physical engineering.",
-      name: "MONOLITH ATELIER",
-      designation: "Physical-Digital Presentation Suite",
-      imageSrc: "/template/_ (9).jpeg",
-      imageAlt: "Precision craftsmanship and engineering",
+      title: "Modular Kinetic Truss",
+      line: "High-tensile carbon nodes with adaptive articulation.",
+      category: "DISCIPLINE 01 // KINETICS",
+      image: "/template/backgroundhero-poster.jpg",
+      imageAlt: "High-tensile carbon nodes and adaptive articulation",
       href: "/about",
-      cardBg: "bg-[#0d1616]",
-      accentColor: "#34d399",
-      borderAccent: "border-white/10",
+    },
+    {
+      id: "aero-hull",
+      index: "02",
+      title: "Monolithic Aero Hull",
+      line: "Continuous aerodynamic shell rated for dynamic loads.",
+      category: "DISCIPLINE 02 // STRUCTURE",
+      image: "/template/_ (8).jpeg",
+      imageAlt: "Continuous aerodynamic shell and spatial engineering",
+      href: "/about",
+    },
+    {
+      id: "composite-weave",
+      index: "03",
+      title: "Composite Shell Weave",
+      line: "Cordura® 3-layer laminate with magnetic modular seals.",
+      category: "DISCIPLINE 03 // MATERIALS",
+      image: "/template/👑.jpeg",
+      imageAlt: "Technical Cordura 3-layer apparel membrane",
+      href: "/merch",
+    },
+    {
+      id: "telemetry-array",
+      index: "04",
+      title: "Micro-Telemetry Array",
+      line: "Sub-millimeter strain sensors with embedded edge logic.",
+      category: "DISCIPLINE 04 // SYSTEMS",
+      image: "/template/_ (9).jpeg",
+      imageAlt: "Sub-millimeter strain sensor instrumentation",
+      href: "/contact",
     },
   ],
 };
