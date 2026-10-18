@@ -16,7 +16,7 @@ export interface NavbarProps {
 
 export function Navbar({
   tone = "dark",
-  variant = "bar",
+  variant = "default",
   stickyScrolled = false,
   transparent = false,
 }: NavbarProps) {

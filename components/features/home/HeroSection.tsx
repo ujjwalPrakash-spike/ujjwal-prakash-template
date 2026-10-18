@@ -25,7 +25,7 @@ export function HeroSection() {
           <div className="w-full h-svh flex flex-col justify-between px-[var(--nav-inset)] select-none">
             {/* Region 1: Header row */}
             <div className="w-full pt-[clamp(12px,2.5vh,28px)] shrink-0">
-              <Navbar tone="dark" transparent />
+              <Navbar tone="dark" variant="default" />
             </div>
 
             {/* Region 2: Main */}
