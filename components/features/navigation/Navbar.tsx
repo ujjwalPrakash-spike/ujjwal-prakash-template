@@ -21,7 +21,7 @@ import {
   IconChevronDown,
 } from "@tabler/icons-react";
 import { NAV_INSET } from "@/lib/tokens";
-import { NAV_SECTIONS } from "@/lib/site/navigation";
+import { MAIN_NAV_LINKS } from "@/lib/site/navigation";
 import { useScrolled } from "@/hooks/useScrolled";
 
 export interface NavbarProps {
@@ -235,87 +235,17 @@ export function Navbar({
 
           {/* Col 2: Center - Nav Links (Exact viewport center) */}
           <nav aria-label="Primary" className="justify-self-center flex items-center">
-            <NavigationMenu tone={config.dropdownTone} delayDuration={80}>
-              <NavigationMenuList className={config.pillOrInline}>
-                {NAV_SECTIONS.map((section) => (
-                  <NavigationMenuItem key={section.title}>
-                    <NavigationMenuTrigger
-                      showChevron={false}
-                      className={config.triggerClass}
-                    >
-                      <span>{section.title}</span>
-                      <IconChevronDown
-                        size={12}
-                        stroke={2.5}
-                        className="shrink-0 text-white/50 transition-transform duration-200 group-hover:text-white/80 group-data-[popup-open]:rotate-180 group-data-[popup-open]:text-[#93c5fd]"
-                      />
-                      {/* Underline growing from the left */}
-                      <span
-                        className={`absolute bottom-1 left-3 right-3 h-[1px] bg-[#93c5fd] origin-left scale-x-0 group-hover:scale-x-100 group-data-[popup-open]:scale-x-100 ${
-                          shouldReduceMotion
-                            ? ""
-                            : "transition-transform duration-200 ease-out"
-                        }`}
-                      />
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent
-                      width={section.items.length > 4 ? "w-[38rem]" : "w-[22rem]"}
-                      className={config.dropdownContentClass}
-                    >
-                      <div
-                        className={`grid gap-2 ${
-                          section.items.length > 4 ? "grid-cols-2" : "grid-cols-1"
-                        }`}
-                      >
-                        {section.items.map((item) => (
-                          <NavigationMenuLink
-                            key={item.title}
-                            href={item.href}
-                            target={item.external ? "_blank" : undefined}
-                            rel={item.external ? "noopener noreferrer" : undefined}
-                            className="group flex items-start gap-3 rounded-xl p-3 text-left transition-colors hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2"
-                          >
-                            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/10 text-white transition-colors group-hover:bg-white/15">
-                              {item.icon}
-                            </div>
-                            <div className="flex flex-col gap-0.5">
-                              <div className="flex items-center gap-1 text-[14px] font-medium text-white">
-                                <span>{item.title}</span>
-                                {item.external ? (
-                                  <IconArrowUpRight
-                                    size={12}
-                                    className="text-white/40 group-hover:text-white"
-                                  />
-                                ) : null}
-                              </div>
-                              {item.description ? (
-                                <p className="text-[12px] text-white/55 leading-snug line-clamp-2">
-                                  {item.description}
-                                </p>
-                              ) : null}
-                            </div>
-                          </NavigationMenuLink>
-                        ))}
-                      </div>
-
-                      {section.featuredLink ? (
-                        <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between px-2">
-                          <span className="font-mono text-white/40 text-[11px] uppercase tracking-wider">
-                            SPO IITK
-                          </span>
-                          <Link
-                            href={section.featuredLink.href}
-                            className="text-[12px] font-medium text-[#93c5fd] hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-[#93c5fd]"
-                          >
-                            {section.featuredLink.label}
-                          </Link>
-                        </div>
-                      ) : null}
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+            <div className={config.pillOrInline}>
+              {MAIN_NAV_LINKS.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className={config.triggerClass}
+                >
+                  <span>{item.title}</span>
+                </Link>
+              ))}
+            </div>
           </nav>
 
           {/* Col 3: Right - Portal Login */}
@@ -376,55 +306,18 @@ export function Navbar({
               transition={{ duration: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
               className={config.mobileDrawerClass}
             >
-              {NAV_SECTIONS.map((section) => {
-                const isExpanded = openMobileSection === section.title;
-                return (
-                  <div key={section.title} className={config.mobileSectionClass}>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setOpenMobileSection(isExpanded ? null : section.title)
-                      }
-                      className="min-h-[44px] flex w-full items-center justify-between py-2 text-[15px] font-medium text-white focus-visible:outline-2 focus-visible:outline-[#93c5fd]"
-                    >
-                      <span>{section.title}</span>
-                      <span className="text-xs text-white/50 font-mono">
-                        {isExpanded ? "−" : "+"}
-                      </span>
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {isExpanded ? (
-                        <motion.div
-                          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-                          className="flex flex-col gap-1 pt-1 pl-2"
-                        >
-                          {section.items.map((item) => (
-                            <Link
-                              key={item.title}
-                              href={item.href}
-                              target={item.external ? "_blank" : undefined}
-                              rel={item.external ? "noopener noreferrer" : undefined}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className={config.mobileItemClass}
-                            >
-                              <span className="flex items-center gap-2.5">
-                                <span className="text-white/60">{item.icon}</span>
-                                <span>{item.title}</span>
-                              </span>
-                              {item.external ? (
-                                <IconArrowUpRight size={13} className="text-white/40" />
-                              ) : null}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      ) : null}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
+              <div className="flex flex-col gap-1 py-1">
+                {MAIN_NAV_LINKS.map((item) => (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="min-h-[44px] flex items-center py-2.5 px-3 text-[15px] font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
+                  >
+                    <span>{item.title}</span>
+                  </Link>
+                ))}
+              </div>
 
               <Link
                 href="mailto:commissions@apexworks.io"
@@ -465,86 +358,19 @@ export function Navbar({
           <LogoBadge size={isDark ? "hero" : "default"} />
         </div>
 
-        {/* Div 2: Center - Nav Links with Dropdowns (hidden below lg) */}
+        {/* Div 2: Center - Nav Links (hidden below lg) */}
         <div className="hidden lg:flex items-center justify-center">
-          <NavigationMenu delayDuration={80}>
-            <NavigationMenuList
-              className={`flex items-center gap-1 rounded-xl px-2 py-1 backdrop-blur-xl transition-all ${
-                isDark
-                  ? "bg-black/30 border border-white/15 text-white"
-                  : "border border-white/60 bg-white/85 shadow-[0_4px_20px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.03]"
-              }`}
-            >
-              {NAV_SECTIONS.map((section) => (
-                <NavigationMenuItem key={section.title}>
-                  <NavigationMenuTrigger
-                    className={`text-[13px] font-semibold tracking-tight px-2.5 xl:px-3.5 py-1.5 rounded-lg transition-all ${
-                      isDark
-                        ? "text-white/90 hover:text-white hover:bg-white/10 data-[popup-open]:bg-white/15 data-[popup-open]:text-white"
-                        : "text-neutral-800 hover:text-black hover:bg-neutral-100/90 data-[popup-open]:bg-neutral-100 data-[popup-open]:text-black"
-                    }`}
-                  >
-                    {section.title}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent
-                    width={section.items.length > 4 ? "w-[38rem]" : "w-[22rem]"}
-                    className="rounded-xl border border-neutral-100/90 bg-white/98 p-4 backdrop-blur-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12),0_0_1px_rgba(0,0,0,0.06)] text-neutral-900"
-                  >
-                    <div
-                      className={`grid gap-2 ${
-                        section.items.length > 4 ? "grid-cols-2" : "grid-cols-1"
-                      }`}
-                    >
-                      {section.items.map((item) => (
-                        <NavigationMenuLink
-                          key={item.title}
-                          href={item.href}
-                          target={item.external ? "_blank" : undefined}
-                          rel={item.external ? "noopener noreferrer" : undefined}
-                          className="group flex items-start gap-3 rounded-lg p-2.5 text-left transition-all hover:bg-neutral-100/80"
-                        >
-                          <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-neutral-100/80 text-neutral-600 transition-colors group-hover:bg-neutral-200/80 group-hover:text-neutral-950">
-                            {item.icon}
-                          </div>
-
-                          <div className="flex flex-col gap-0.5">
-                            <div className="flex items-center gap-1 text-[13px] font-semibold text-neutral-900 group-hover:text-black">
-                              <span>{item.title}</span>
-                              {item.external ? (
-                                <IconArrowUpRight
-                                  size={12}
-                                  className="text-neutral-400 group-hover:text-black"
-                                />
-                              ) : null}
-                            </div>
-                            {item.description ? (
-                              <NavigationMenuDescription className="text-[11px] text-neutral-500 font-normal leading-snug">
-                                {item.description}
-                              </NavigationMenuDescription>
-                            ) : null}
-                          </div>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-
-                    {section.featuredLink ? (
-                      <div className="mt-3 pt-3 border-t border-neutral-100 flex items-center justify-between px-2">
-                        <Link
-                          href={section.featuredLink.href}
-                          className="text-xs font-semibold text-neutral-900 hover:text-black transition-colors inline-flex items-center gap-1"
-                        >
-                          <span>{section.featuredLink.label}</span>
-                        </Link>
-                        <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                          APEX.WORKS
-                        </span>
-                      </div>
-                    ) : null}
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className={config.pillOrInline}>
+            {MAIN_NAV_LINKS.map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={config.triggerClass}
+              >
+                <span>{item.title}</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Div 3: Right - Solid CTA Button & Mobile Trigger */}
@@ -596,62 +422,18 @@ export function Navbar({
             transition={{ duration: 0.22, ease: "easeOut" }}
             className="fixed inset-x-4 top-20 z-50 max-h-[80vh] overflow-y-auto rounded-xl border border-neutral-200/90 bg-white/98 p-6 backdrop-blur-2xl shadow-2xl lg:hidden flex flex-col gap-4 text-neutral-900"
           >
-            {NAV_SECTIONS.map((section) => {
-              const isExpanded = openMobileSection === section.title;
-              return (
-                <div
-                  key={section.title}
-                  className="border-b border-neutral-100 pb-3"
+            <div className="flex flex-col gap-1 py-1">
+              {MAIN_NAV_LINKS.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="min-h-[44px] flex items-center py-2.5 px-3 text-[15px] font-medium text-neutral-800 hover:text-black hover:bg-neutral-100 rounded-xl transition-colors"
                 >
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setOpenMobileSection(isExpanded ? null : section.title)
-                    }
-                    className="flex w-full items-center justify-between py-1.5 text-sm font-bold text-neutral-800"
-                  >
-                    <span>{section.title}</span>
-                    <span className="text-xs text-neutral-400 font-mono">
-                      {isExpanded ? "−" : "+"}
-                    </span>
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isExpanded ? (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="flex flex-col gap-1.5 pt-2 pl-2"
-                      >
-                        {section.items.map((item) => (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            target={item.external ? "_blank" : undefined}
-                            rel={
-                              item.external ? "noopener noreferrer" : undefined
-                            }
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="flex items-center justify-between py-1.5 text-xs text-neutral-600 hover:text-black"
-                          >
-                            <span className="flex items-center gap-2">
-                              <span className="text-neutral-400">
-                                {item.icon}
-                              </span>
-                              <span>{item.title}</span>
-                            </span>
-                            {item.external ? (
-                              <IconArrowUpRight size={13} />
-                            ) : null}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
+                  <span>{item.title}</span>
+                </Link>
+              ))}
+            </div>
 
             <Link
               href="mailto:commissions@apexworks.io"
