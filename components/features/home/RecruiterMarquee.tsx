@@ -1,36 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { RECRUITER_LOGOS, type RecruiterLogo } from "@/lib/home/recruiters";
 
-function CountUpRecruiters() {
-  const shouldReduceMotion = useReducedMotion();
-  const [count, setCount] = useState(shouldReduceMotion ? 250 : 0);
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-    const start = 0;
-    const end = 250;
-    const duration = 1400;
-    const startTime = performance.now();
-
-    function update(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(start + (end - start) * easeProgress));
-      if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-  }, [shouldReduceMotion]);
-
-  return (
-    <span className="tabular-nums">
-      {count}+ companies recruited in Phase 1, 2025–26
-    </span>
-  );
-}
 
 function LogoItem({
   logo,

@@ -1,6 +1,6 @@
 import React from "react";
 import { RichText, TextSegment } from "./RichText";
-import { slugify } from "@/lib/format";
+import { slugify } from "@/lib/utils";
 
 export type RichSegment = TextSegment;
 
