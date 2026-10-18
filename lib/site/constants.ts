@@ -7,6 +7,6 @@ export const SITE_METADATA = {
 } as const;
 
 export const HERO_CONFIG = {
-  videoUrl: "/template/15153229_1920_1080_30fps.mp4",
-  posterUrl: "/template/DSC03294.jpg.jpeg",
+  videoUrl: "/template/backgroundhero.mp4",
+  posterUrl: "/template/backgroundhero-poster.jpg",
 } as const;
