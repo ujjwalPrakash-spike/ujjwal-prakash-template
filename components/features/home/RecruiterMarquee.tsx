@@ -131,12 +131,12 @@ export function RecruiterMarquee() {
             className="font-medium tracking-[-0.03em] text-neutral-950"
             style={{ fontSize: "clamp(2rem, 3.6vw, 3.5rem)" }}
           >
-            Past recruiters
+            Technical partners & collaborators
           </motion.h2>
         </div>
 
         <p className="text-[15px] text-neutral-950/60 font-normal">
-          <CountUpRecruiters />
+          Cross-industry engineering and manufacturing network
         </p>
       </div>
 

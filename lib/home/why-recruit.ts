@@ -7,42 +7,41 @@ export interface WhyRecruitPanel {
   context: string;
 }
 
-export const PLACEMENTS_HEADLINE = "1,202";
-export const PLACEMENTS_LABEL = "offers in Phase 1, 2025–26";
-
 export const WHY_RECRUIT_PANELS: WhyRecruitPanel[] = [
   {
-    id: "admissions",
-    category: "ADMISSIONS",
-    number: "56,880",
-    label: "qualified from 179,694 candidates in 2026",
+    id: "aerodynamics",
+    category: "AERODYNAMICS",
+    number: "820",
+    suffix: "KG",
+    label: "Peak downforce at 240 km/h",
     context:
-      "About 17,000 IIT seats. Postgraduates enter through GATE.",
+      "Engineered through 400+ computational fluid dynamics cycles with active carbon DRS winglets.",
   },
   {
-    id: "research",
-    category: "RESEARCH",
-    number: "₹1,540",
-    suffix: "Cr",
-    label: "in research funding over three years",
+    id: "propulsion",
+    category: "PROPULSION",
+    number: "1,050",
+    suffix: "BHP",
+    label: "Hybrid twin-turbocharged powertrain",
     context:
-      "2,000+ publications a year. C3iHub is now a national research park for cybersecurity.",
+      "Instantaneous torque delivery with dual axial-flux motors and a 9,200 RPM internal combustion ceiling.",
   },
   {
-    id: "alumni",
-    category: "ALUMNI",
-    number: "44,000",
-    suffix: "+",
-    label: "alumni",
+    id: "chassis",
+    category: "CHASSIS",
+    number: "1,140",
+    suffix: "KG",
+    label: "Dry curb weight",
     context:
-      "Includes Infosys co-founder N. R. Narayana Murthy (M.Tech, 1969) and Pawan Goenka (B.Tech, mechanical).",
+      "Autoclave-cured carbon monocoque with 3D-printed titanium suspension uprights and ceramic matrix brakes.",
   },
   {
-    id: "placements",
-    category: "PLACEMENTS",
-    number: PLACEMENTS_HEADLINE,
-    label: PLACEMENTS_LABEL,
+    id: "acceleration",
+    category: "TELEMETRY",
+    number: "1.9",
+    suffix: "SEC",
+    label: "0–100 km/h sprint velocity",
     context:
-      "From 250+ companies. Phase 1 closed 26 December 2025.",
+      "Verified on laser timing arrays under official FIA homologation protocols.",
   },
 ];

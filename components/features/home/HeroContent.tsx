@@ -86,7 +86,7 @@ export function HeroContent() {
           className="font-mono font-semibold tracking-[0.14em] text-white/85 uppercase truncate sm:whitespace-normal"
           style={{ fontSize: "clamp(10px, 1.1vw, 12px)" }}
         >
-          STUDENTS&apos; PLACEMENT OFFICE · IIT KANPUR · 2026–27
+          APEX WORKS · BESPOKE DIGITAL ENGINE · 2026 EDITION
         </span>
       </motion.div>
 
@@ -102,7 +102,7 @@ export function HeroContent() {
             variants={line1Variants}
             className="block lg:whitespace-nowrap"
           >
-            Where India&apos;s sharpest minds
+            Engineering digital prestige
           </motion.span>
         </div>
         <div className="overflow-hidden">
@@ -112,7 +112,7 @@ export function HeroContent() {
             variants={line2Variants}
             className="block lg:whitespace-nowrap"
           >
-            meet their next move.
+            for speed and atelier.
           </motion.span>
         </div>
       </h1>
@@ -122,10 +122,10 @@ export function HeroContent() {
         initial="hidden"
         animate="visible"
         variants={subcopyVariants}
-        className="text-white/75 font-normal leading-relaxed max-w-[46ch] [@media(max-height:640px)]:hidden"
+        className="text-white/75 font-normal leading-relaxed max-w-[50ch] [@media(max-height:640px)]:hidden"
         style={{ fontSize: "clamp(14px, min(1.15vw, 2.2vh), 18px)" }}
       >
-        Recruit from one of India&apos;s most selective engineering campuses. One portal, one process, end to end.
+        Ultra-high framerate web architecture, physics-based motion, and editorial commerce engineered for racing teams, luxury ateliers, and hardware pioneers.
       </motion.p>
 
       {/* CTAs */}
@@ -136,18 +136,16 @@ export function HeroContent() {
         className="flex flex-col min-[480px]:flex-row items-stretch min-[480px]:items-center gap-3 w-full min-[480px]:w-auto"
       >
         <Link
-          href="/recruiters/why-iitk"
+          href="/merch"
           className="h-[clamp(40px,5.5vh,48px)] px-6 rounded-md bg-white text-black font-semibold text-sm inline-flex items-center justify-center hover:bg-neutral-200 transition-colors shadow-sm active:scale-95"
         >
-          Recruit with us
+          Explore Lookbook & Merch
         </Link>
         <Link
-          href="https://placement.iitk.ac.in/login"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#specs"
           className="h-[clamp(40px,5.5vh,48px)] px-6 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold text-sm inline-flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
         >
-          Student login
+          View Telemetry & Specs
         </Link>
       </motion.div>
     </div>

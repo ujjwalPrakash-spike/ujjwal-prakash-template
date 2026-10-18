@@ -198,7 +198,7 @@ export function NewsSection() {
             className="font-medium tracking-[-0.03em] text-neutral-950"
             style={{ fontSize: "clamp(2rem, 3.6vw, 3.5rem)" }}
           >
-            News
+            Journal & dispatch
           </motion.h2>
         </div>
 
@@ -207,9 +207,9 @@ export function NewsSection() {
           className="flex flex-wrap items-center gap-x-6 gap-y-2"
         >
           {[
-            { label: "Follow on X", href: "https://twitter.com/IITKanpur" },
-            { label: "Facebook", href: "https://www.facebook.com/iitkanpur" },
-            { label: "All news", href: "https://www.iitk.ac.in/new/" },
+            { label: "Follow on X", href: "https://x.com" },
+            { label: "Instagram", href: "https://instagram.com" },
+            { label: "All dispatch", href: "/about" },
           ].map(({ label, href }) => (
             <a
               key={href}

@@ -72,7 +72,7 @@ const VARIANT_CONFIG: Record<NavVariant, Record<NavTone, VariantConfig>> = {
       dropdownTone: "dark",
       loginButtonClass:
         "inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-white px-4 text-[13px] font-medium text-neutral-950 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2 shrink-0 select-none",
-      loginText: { desktop: "Portal Login", mobile: "Login" },
+      loginText: { desktop: "Commission a Build", mobile: "Inquire" },
       mobileButtonClass:
         "flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-transparent text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2 shrink-0",
       mobileDrawerClass:
@@ -102,7 +102,7 @@ const VARIANT_CONFIG: Record<NavVariant, Record<NavTone, VariantConfig>> = {
       dropdownTone: "dark",
       loginButtonClass:
         "inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-white px-4 text-[13px] font-medium text-neutral-950 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2 shrink-0 select-none",
-      loginText: { desktop: "Portal Login", mobile: "Login" },
+      loginText: { desktop: "Commission a Build", mobile: "Inquire" },
       mobileButtonClass:
         "flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-transparent text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2 shrink-0",
       mobileDrawerClass:
@@ -134,7 +134,7 @@ const VARIANT_CONFIG: Record<NavVariant, Record<NavTone, VariantConfig>> = {
       dropdownTone: "light",
       loginButtonClass:
         "hidden sm:inline-flex items-center gap-1.5 rounded-md px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all shadow-sm active:scale-95 bg-white text-black hover:bg-neutral-200",
-      loginText: { desktop: "Portal Login", mobile: "Login" },
+      loginText: { desktop: "Commission a Build", mobile: "Inquire" },
       mobileButtonClass:
         "lg:hidden flex h-9 w-9 items-center justify-center rounded-md border backdrop-blur-md shadow-sm transition-colors border-white/15 bg-black/40 text-white hover:bg-white/10",
       mobileDrawerClass:
@@ -163,7 +163,7 @@ const VARIANT_CONFIG: Record<NavVariant, Record<NavTone, VariantConfig>> = {
       dropdownTone: "light",
       loginButtonClass:
         "hidden sm:inline-flex items-center gap-1.5 rounded-md px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all shadow-sm active:scale-95 bg-neutral-950 text-white hover:bg-neutral-800",
-      loginText: { desktop: "Portal Login", mobile: "Login" },
+      loginText: { desktop: "Commission a Build", mobile: "Inquire" },
       mobileButtonClass:
         "lg:hidden flex h-9 w-9 items-center justify-center rounded-md border backdrop-blur-md shadow-sm transition-colors border-neutral-200/90 bg-white/95 text-neutral-800 hover:bg-neutral-100",
       mobileDrawerClass:
@@ -321,7 +321,7 @@ export function Navbar({
           {/* Col 3: Right - Portal Login */}
           <div className="justify-self-end flex items-center gap-3">
             <Link
-              href="https://placement.iitk.ac.in/login"
+              href="mailto:commissions@apexworks.io"
               target="_blank"
               rel="noopener noreferrer"
               className={config.loginButtonClass}
@@ -345,7 +345,7 @@ export function Navbar({
 
           <div className="flex items-center gap-2">
             <Link
-              href="https://placement.iitk.ac.in/login"
+              href="mailto:commissions@apexworks.io"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-9 items-center justify-center gap-1 rounded-full bg-white px-3 text-[12px] font-medium text-neutral-950 hover:bg-neutral-100 transition-colors shrink-0"
@@ -427,14 +427,12 @@ export function Navbar({
               })}
 
               <Link
-                href="https://placement.iitk.ac.in/login"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:commissions@apexworks.io"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={config.mobileCTAClass}
               >
                 <IconLogin size={15} stroke={2.2} />
-                <span>Portal Login</span>
+                <span>Commission a Build</span>
               </Link>
             </motion.div>
           ) : null}
@@ -538,7 +536,7 @@ export function Navbar({
                           <span>{section.featuredLink.label}</span>
                         </Link>
                         <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                          SPO IITK
+                          APEX.WORKS
                         </span>
                       </div>
                     ) : null}
@@ -552,9 +550,7 @@ export function Navbar({
         {/* Div 3: Right - Solid CTA Button & Mobile Trigger */}
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
-            href="https://placement.iitk.ac.in/login"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:commissions@apexworks.io"
             className={`hidden sm:inline-flex items-center gap-1.5 rounded-md px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all shadow-sm active:scale-95 ${
               isDark
                 ? "bg-white text-black hover:bg-neutral-200"
@@ -562,13 +558,11 @@ export function Navbar({
             }`}
           >
             <IconLogin size={14} stroke={2.2} />
-            <span>Portal Login</span>
+            <span>Commission a Build</span>
           </Link>
 
           <Link
-            href="https://placement.iitk.ac.in/login"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:commissions@apexworks.io"
             className={`sm:hidden inline-flex items-center gap-1 rounded-md px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider shadow-sm ${
               isDark ? "bg-white text-black" : "bg-neutral-950 text-white"
             }`}
@@ -660,7 +654,7 @@ export function Navbar({
             })}
 
             <Link
-              href="https://placement.iitk.ac.in/login"
+              href="mailto:commissions@apexworks.io"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}

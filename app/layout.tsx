@@ -18,13 +18,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: SITE_METADATA.title,
-  description: SITE_METADATA.description,
-  icons: {
-    icon: "/images/logo.png",
-    shortcut: "/images/logo.png",
-    apple: "/images/logo.png",
+  title: {
+    default: SITE_METADATA.title,
+    template: "%s | APEX.WORKS",
   },
+  description: SITE_METADATA.description,
 };
 
 export default function RootLayout({

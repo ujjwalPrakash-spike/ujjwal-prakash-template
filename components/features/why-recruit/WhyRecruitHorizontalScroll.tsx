@@ -77,7 +77,7 @@ function IntroPanel() {
         {/* Top row */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-auto">
           <span className="text-[13px] uppercase tracking-[0.12em] text-white/60 font-normal">
-            WHY IIT KANPUR
+            SPECIFICATIONS // 2026
           </span>
           <span className="text-[13px] text-white/45">
             OVERVIEW
@@ -90,16 +90,16 @@ function IntroPanel() {
             className="font-medium tracking-[-0.03em] text-white leading-tight max-w-[14ch]"
             style={{ fontSize: "clamp(3rem, 7vw, 7rem)" }}
           >
-            Why recruit from IIT Kanpur
+            Precision telemetry & physics.
           </h2>
           <p
             className="text-white/75 font-normal"
             style={{ fontSize: "clamp(15px, 1.25vw, 18px)" }}
           >
-            Teaching engineering and science since 1959.
+            Benchmarked at the limits of track engineering and digital luxury.
           </p>
           <p className="text-white/40 text-[13px] font-normal">
-            Figures: IIT Kanpur, NIRF, JEE Advanced, SPO.
+            Figures: Dyno, wind tunnel, and laser track telemetry arrays.
           </p>
         </div>
       </div>
@@ -114,10 +114,10 @@ function CtaPanel() {
         {/* Top row matching all other panels */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-auto">
           <span className="text-[13px] uppercase tracking-[0.12em] text-white/60 font-normal">
-            PARTNER WITH IIT KANPUR
+            COMMISSION & ATELIER
           </span>
           <span className="text-[13px] text-white/45">
-            GET STARTED
+            NEXT STEP
           </span>
         </div>
 
@@ -127,28 +127,26 @@ function CtaPanel() {
             className="font-medium tracking-[-0.03em] text-white leading-tight"
             style={{ fontSize: "clamp(3rem, 7vw, 7rem)" }}
           >
-            Ready to hire?
+            Deploy for your brand.
           </h2>
           <p
             className="text-white/75 font-normal max-w-[46ch]"
             style={{ fontSize: "clamp(15px, 1.25vw, 18px)" }}
           >
-            Hundreds of premier organizations recruit from IIT Kanpur.
+            Bespoke digital architecture delivered in 48 hours for racing teams, luxury ateliers, and hardware pioneers.
           </p>
           <div className="flex flex-col min-[480px]:flex-row items-stretch min-[480px]:items-center gap-3 mt-2 w-full min-[480px]:w-auto">
             <Link
-              href="https://placement.iitk.ac.in/login"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/merch"
               className="h-[clamp(40px,5.5vh,48px)] px-6 rounded-md bg-white text-black font-semibold text-sm inline-flex items-center justify-center hover:bg-neutral-200 transition-colors shadow-sm active:scale-95"
             >
-              Recruiter portal login
+              Explore Lookbook & Merch
             </Link>
             <Link
-              href="/recruiters/why-iitk#steps"
+              href="/about"
               className="h-[clamp(40px,5.5vh,48px)] px-6 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold text-sm inline-flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
             >
-              Recruitment procedure
+              Atelier Story & Philosophy
             </Link>
           </div>
         </div>
@@ -205,14 +203,14 @@ export function WhyRecruitHorizontalScroll({ className = "" }: { className?: str
   if (isMobile || shouldReduceMotion) {
     return (
       <section
-        id="why-recruit"
+        id="specs"
         className={`relative w-full bg-neutral-950 text-white ${className}`}
       >
         <ol className="flex flex-col">
           <li className="min-h-[60svh] flex flex-col px-[clamp(24px,6vw,96px)] pt-[clamp(24px,4vh,48px)] pb-[clamp(24px,5vh,56px)] border-b border-white/10">
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-auto">
               <span className="text-[13px] uppercase tracking-[0.12em] text-white/60 font-normal">
-                WHY IIT KANPUR
+                SPECIFICATIONS // 2026
               </span>
               <span className="text-[13px] text-white/45">
                 OVERVIEW
@@ -223,13 +221,13 @@ export function WhyRecruitHorizontalScroll({ className = "" }: { className?: str
                 className="font-medium tracking-[-0.03em] text-white leading-tight max-w-[14ch]"
                 style={{ fontSize: "clamp(3rem, 7vw, 7rem)" }}
               >
-                Why recruit from IIT Kanpur
+                Precision telemetry & physics.
               </h2>
               <p className="text-white/75 font-normal" style={{ fontSize: "clamp(15px, 1.25vw, 18px)" }}>
-                Teaching engineering and science since 1959.
+                Benchmarked at the limits of track engineering and digital luxury.
               </p>
               <p className="text-white/40 text-[13px] font-normal">
-                Figures: IIT Kanpur, NIRF, JEE Advanced, SPO.
+                Figures: Dyno, wind tunnel, and laser track telemetry arrays.
               </p>
             </div>
           </li>
@@ -275,10 +273,10 @@ export function WhyRecruitHorizontalScroll({ className = "" }: { className?: str
           <li className="min-h-[60svh] flex flex-col px-[clamp(24px,6vw,96px)] pt-[clamp(24px,4vh,48px)] pb-[clamp(24px,5vh,56px)]">
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-auto">
               <span className="text-[13px] uppercase tracking-[0.12em] text-white/60 font-normal">
-                PARTNER WITH IIT KANPUR
+                COMMISSION & ATELIER
               </span>
               <span className="text-[13px] text-white/45">
-                GET STARTED
+                NEXT STEP
               </span>
             </div>
             <div className="mt-auto flex flex-col items-start gap-[clamp(8px,1.5vh,16px)]">
@@ -286,25 +284,23 @@ export function WhyRecruitHorizontalScroll({ className = "" }: { className?: str
                 className="font-medium tracking-[-0.03em] text-white leading-tight"
                 style={{ fontSize: "clamp(3rem, 7vw, 7rem)" }}
               >
-                Ready to hire?
+                Deploy for your brand.
               </h2>
               <p className="text-white/75 font-normal max-w-[46ch]" style={{ fontSize: "clamp(15px, 1.25vw, 18px)" }}>
-                Hundreds of premier organizations recruit from IIT Kanpur.
+                Bespoke digital architecture delivered in 48 hours for racing teams, luxury ateliers, and hardware pioneers.
               </p>
               <div className="flex flex-col min-[480px]:flex-row items-stretch min-[480px]:items-center gap-3 mt-2 w-full min-[480px]:w-auto">
                 <Link
-                  href="https://placement.iitk.ac.in/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/merch"
                   className="h-[clamp(40px,5.5vh,48px)] px-6 rounded-md bg-white text-black font-semibold text-sm inline-flex items-center justify-center hover:bg-neutral-200 transition-colors shadow-sm active:scale-95"
                 >
-                  Recruiter portal login
+                  Explore Lookbook & Merch
                 </Link>
                 <Link
-                  href="/recruiters/why-iitk#steps"
+                  href="/about"
                   className="h-[clamp(40px,5.5vh,48px)] px-6 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold text-sm inline-flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
                 >
-                  Recruitment procedure
+                  Atelier Story & Philosophy
                 </Link>
               </div>
             </div>
@@ -318,7 +314,7 @@ export function WhyRecruitHorizontalScroll({ className = "" }: { className?: str
   return (
     <section
       ref={sectionRef}
-      id="why-recruit"
+      id="specs"
       className={`relative w-full bg-neutral-950 text-white ${className}`}
       style={{ height: `${scrollHeight + viewportWidth}px` }}
     >

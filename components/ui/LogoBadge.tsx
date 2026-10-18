@@ -1,7 +1,6 @@
-// Official SPO brand logo badge component with transparent floating styling.
+"use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 interface LogoBadgeProps {
   className?: string;
@@ -13,36 +12,41 @@ interface LogoBadgeProps {
 export function LogoBadge({
   className = "",
   onClick,
-  imageClassName,
   size = "default",
 }: LogoBadgeProps) {
-  const imgClass =
-    imageClassName ??
-    (size === "bar"
-      ? "h-8 w-auto object-contain brightness-0 invert"
-      : size === "bar-scrolled"
-      ? "h-7 w-auto object-contain brightness-0 invert"
-      : size === "hero"
-      ? "h-[clamp(52px,8.5vh,88px)] w-auto object-contain drop-shadow-xl"
-      : size === "footer"
-      ? "h-8 max-h-[32px] w-auto object-contain brightness-0 invert"
-      : "h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain drop-shadow-xl");
+  const isHero = size === "hero";
+  const isCompact = size === "bar-scrolled" || size === "footer";
 
   return (
     <Link
       href="/"
       onClick={onClick}
-      className={`inline-flex items-center justify-center bg-transparent p-0 hover:opacity-85 transition-opacity ${className}`}
-      aria-label="SPO Home"
+      className={`inline-flex items-center gap-2.5 bg-transparent p-0 hover:opacity-85 transition-opacity group ${className}`}
+      aria-label="Apex Atelier Home"
     >
-      <Image
-        src="/images/logo.png"
-        alt="SPO IIT Kanpur Logo"
-        width={500}
-        height={500}
-        priority
-        className={imgClass}
-      />
+      {/* Geometric Apex Monogram */}
+      <div
+        className={`relative flex items-center justify-center shrink-0 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-mono font-black transition-transform group-hover:scale-105 ${
+          isHero
+            ? "w-11 h-11 text-lg"
+            : isCompact
+            ? "w-7 h-7 text-xs"
+            : "w-8 h-8 text-sm"
+        }`}
+      >
+        <span>▲</span>
+      </div>
+
+      {/* Brutalist Brand Wordmark */}
+      <div className="flex flex-col text-left leading-none">
+        <span
+          className={`font-mono font-bold tracking-[0.16em] uppercase text-white ${
+            isHero ? "text-base tracking-[0.2em]" : isCompact ? "text-xs" : "text-sm"
+          }`}
+        >
+          APEX<span className="text-[#93c5fd]">.</span>WORKS
+        </span>
+      </div>
     </Link>
   );
 }
