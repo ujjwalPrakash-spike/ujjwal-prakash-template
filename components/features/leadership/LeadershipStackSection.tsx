@@ -2,7 +2,7 @@ import { LEADERSHIP_SECTION_DATA } from "@/lib/home/leadership";
 import { LeadershipCard } from "./LeadershipCard";
 
 export function LeadershipStackSection() {
-  const { sectionTag, heading, subheading, messages } =
+  const { sectionTag, heading, subheading, cards } =
     LEADERSHIP_SECTION_DATA;
 
   return (
@@ -12,24 +12,26 @@ export function LeadershipStackSection() {
           <span>{sectionTag}</span>
         </div>
 
-        <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl">
+        <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl">
           {heading}
         </h2>
-        <p className="mt-4 max-w-3xl text-base text-neutral-600 sm:text-lg md:text-xl">
+        <p className="mt-4 max-w-3xl text-base text-neutral-600 sm:text-lg md:text-xl leading-relaxed">
           {subheading}
         </p>
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-col space-y-12 pb-24">
-        {messages.map((message, index) => (
+      <div className="mx-auto flex max-w-7xl flex-col space-y-16 pb-32">
+        {cards.map((card, index) => (
           <LeadershipCard
-            key={message.id}
-            message={message}
+            key={card.id}
+            card={card}
             index={index}
-            totalCards={messages.length}
+            totalCards={cards.length}
           />
         ))}
       </div>
     </section>
   );
 }
+
+export default LeadershipStackSection;
