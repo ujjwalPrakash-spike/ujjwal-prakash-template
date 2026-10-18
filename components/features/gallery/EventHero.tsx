@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { IconArrowLeft } from "@tabler/icons-react";
-import { TOKENS, NAV_INSET } from "@/lib/tokens";
+import { NAV_INSET } from "@/lib/tokens";
 import { formatGalleryDate } from "@/lib/gallery/utils";
 import type { GalleryEvent } from "@/lib/gallery/types";
 
