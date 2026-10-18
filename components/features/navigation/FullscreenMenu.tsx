@@ -218,16 +218,16 @@ export function FullscreenMenu({
         className="w-full max-w-[1920px] mx-auto min-h-0 h-full flex flex-col justify-center pt-2 pb-8 lg:pb-12"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center h-full max-h-full min-h-0 w-full">
-          {/* Cols 1-5: Preview Panel (>=1024px and height >= 600px only) */}
+          {/* Cols 1-6: Widened Preview Panel (>=1024px and height >= 600px only) */}
           <motion.div
             custom={0}
             variants={fadeUpVariants}
             initial="closed"
             animate="open"
             exit="closed"
-            className="hidden lg:flex flex-col justify-center h-full max-h-full min-h-0 col-span-5 w-full"
+            className="hidden lg:flex flex-col justify-center h-full max-h-full min-h-0 col-span-6 w-full"
           >
-            <div className="relative w-full aspect-[4/5] max-h-[calc(100svh-260px)] rounded-[12px] overflow-hidden bg-white/[0.05]">
+            <div className="relative w-full aspect-[1/1] max-h-[calc(100svh-240px)] rounded-[16px] overflow-hidden bg-white/[0.05]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activePreview.index}
@@ -242,7 +242,7 @@ export function FullscreenMenu({
                       src={activePreview.image}
                       alt={activePreview.caption}
                       fill
-                      sizes="(max-width: 1200px) 440px, 520px"
+                      sizes="(max-width: 1200px) 640px, 800px"
                       className="object-cover"
                     />
                   ) : (
@@ -261,8 +261,8 @@ export function FullscreenMenu({
             </div>
           </motion.div>
 
-          {/* Cols 6-12: The Stacked Links */}
-          <div className="col-span-12 lg:col-span-7 flex flex-col justify-center h-full">
+          {/* Cols 7-12: The Stacked Links */}
+          <div className="col-span-12 lg:col-span-6 flex flex-col justify-center h-full">
             <nav
               aria-label="Primary Navigation"
               className="flex flex-col gap-0 select-none [&:has(a:hover,a:focus-visible)_a]:opacity-35 [&:has(a:hover,a:focus-visible)_a:hover]:!opacity-100 [&:has(a:hover,a:focus-visible)_a:focus-visible]:!opacity-100 [@media(hover:none)]:!opacity-100"
