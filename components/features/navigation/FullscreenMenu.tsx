@@ -2,18 +2,22 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion, useMotionValue, useSpring, type Variants } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import {
   IconBrandGithub,
   IconBrandX,
   IconBrandInstagram,
   IconBrandLinkedin,
-  IconArrowUpRight,
 } from "@tabler/icons-react";
-import { MENU_CONFIG, MenuCard } from "@/lib/site/menu";
-import { ImageSlot } from "@/components/shared/ui/ImageSlot";
-import { TOKENS, NAV_INSET } from "@/lib/tokens";
+import { MENU_CONFIG, MenuLink } from "@/lib/site/menu";
+import { NAV_INSET } from "@/lib/tokens";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -36,93 +40,7 @@ function SocialIcon({ platform }: { platform: string }) {
   }
 }
 
-function MenuContentCard({
-  card,
-  onNavigate,
-  reduceMotion,
-}: {
-  card: MenuCard;
-  onNavigate: () => void;
-  reduceMotion: boolean;
-}) {
-  const cardRef = React.useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springX = useSpring(mouseX, { stiffness: 140, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 140, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (reduceMotion || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const relX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-    const relY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-    mouseX.set(relX * 6); // Max 6px subtle translation
-    mouseY.set(relY * 6);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        x: reduceMotion ? 0 : springX,
-        y: reduceMotion ? 0 : springY,
-        borderRadius: TOKENS.radiusPortrait,
-      }}
-      className="group relative flex flex-col justify-between p-5 bg-white/[0.05] hover:bg-white/[0.08] transition-colors duration-300 w-full min-w-[260px] max-w-full shrink-0"
-    >
-      <Link
-        href={card.href}
-        onClick={onNavigate}
-        className="flex flex-col gap-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#93c5fd] rounded-lg"
-        aria-label={`${card.eyebrow}: ${card.title}`}
-      >
-        <div className="w-full overflow-hidden rounded-md pointer-events-none">
-          <ImageSlot
-            src={card.image}
-            alt={card.title}
-            aspectRatio={card.aspectRatio || "16:9"}
-            roleLabel={card.roleLabel || card.eyebrow}
-            tone="dark"
-            className="w-full"
-          />
-        </div>
-
-        <div className="flex items-start justify-between gap-3 pt-1">
-          <div className="flex flex-col gap-1 min-w-0">
-            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/45">
-              {card.eyebrow}
-            </span>
-            <span className="text-[14px] font-medium tracking-tight text-white group-hover:text-white transition-colors truncate">
-              {card.title}
-            </span>
-            {card.description && (
-              <p className="text-[12px] leading-relaxed text-white/60 line-clamp-2">
-                {card.description}
-              </p>
-            )}
-            {card.date && (
-              <span className="text-[11px] font-mono text-white/50 tracking-wider">
-                {card.date}
-              </span>
-            )}
-          </div>
-
-          <div className="shrink-0 p-1.5 rounded-full bg-white/5 text-white/60 group-hover:text-white group-hover:bg-white/10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200">
-            <IconArrowUpRight size={16} stroke={1.5} />
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
+const EASE_CUBIC: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export function FullscreenMenu({
   isOpen,
@@ -133,6 +51,15 @@ export function FullscreenMenu({
   const prefersReduced = useReducedMotion();
   const reduceMotion = Boolean(prefersReduced);
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  // Active preview state: follows hovered or focused link, falls back to default
+  const [activeItem, setActiveItem] = React.useState<MenuLink | null>(null);
+
+  const activePreview = {
+    image: activeItem?.image ?? MENU_CONFIG.defaultPreview.image,
+    caption: activeItem?.caption ?? MENU_CONFIG.defaultPreview.caption,
+    index: activeItem?.index ?? MENU_CONFIG.defaultPreview.index,
+  };
 
   // Focus trap & Escape key
   React.useEffect(() => {
@@ -168,7 +95,7 @@ export function FullscreenMenu({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Lock body scroll while open
+  // Lock body scroll while open; restore focus to trigger button
   React.useEffect(() => {
     if (!isOpen) return;
     const originalOverflow = document.body.style.overflow;
@@ -183,9 +110,7 @@ export function FullscreenMenu({
     };
   }, [isOpen, triggerRef]);
 
-  const EASE_CUBIC: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-  // Animation variants
+  // Motion variants
   const panelVariants: Variants = {
     closed: {
       clipPath: reduceMotion ? "none" : "inset(0% 0% 100% 0%)",
@@ -215,7 +140,7 @@ export function FullscreenMenu({
       opacity: 1,
       transition: {
         duration: reduceMotion ? 0.2 : 0.8,
-        delay: reduceMotion ? 0 : 0.15 + custom * 0.07,
+        delay: reduceMotion ? 0 : 0.12 + custom * 0.07,
         ease: EASE_CUBIC,
       },
     }),
@@ -231,13 +156,12 @@ export function FullscreenMenu({
       y: 0,
       transition: {
         duration: reduceMotion ? 0.2 : 0.6,
-        delay: reduceMotion ? 0 : 0.35 + custom * 0.06,
+        delay: reduceMotion ? 0 : 0.35 + custom * 0.08,
         ease: EASE_CUBIC,
       },
     }),
   };
 
-  const activeCards = MENU_CONFIG.cards.filter((c) => Boolean(c.title));
   const activeSocials = MENU_CONFIG.socials.filter((s) => Boolean(s.href));
 
   return (
@@ -250,167 +174,202 @@ export function FullscreenMenu({
       initial="closed"
       animate="open"
       exit="closed"
-      className="fixed inset-0 z-[100] w-full h-[100svh] bg-neutral-950 text-white overflow-y-auto overflow-x-hidden selection:bg-[#93c5fd] selection:text-neutral-950"
+      className="fixed inset-0 z-[100] w-full h-[100svh] bg-neutral-950 text-white grid grid-rows-[64px_1fr_auto] overflow-hidden lg:overflow-hidden max-lg:overflow-y-auto max-h-[100svh] [overscroll-behavior:contain] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden selection:bg-[#93c5fd] selection:text-neutral-950"
     >
-      <div
+      {/* Row 1: 64px Spacer aligned with Bar Navbar */}
+      <div className="w-full h-16 shrink-0 pointer-events-none" aria-hidden="true" />
+
+      {/* Row 2: Main Area (Height-aware, 12-columns, vertically centered) */}
+      <main
         style={{
           paddingLeft: NAV_INSET,
           paddingRight: NAV_INSET,
         }}
-        className="w-full max-w-[1920px] mx-auto min-h-full flex flex-col justify-between pt-24 pb-8 lg:pt-28 lg:pb-12"
+        className="w-full max-w-[1920px] mx-auto min-h-0 h-full flex flex-col justify-center py-4 lg:py-6"
       >
-        {/* Main 12-Column Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 w-full my-auto">
-          {/* Left Column (Cols 1-4 on Desktop): Brand Tagline + Content Cards */}
-          <div className="order-2 lg:order-1 lg:col-span-4 flex flex-col justify-between gap-8">
-            <motion.div
-              custom={0}
-              variants={fadeUpVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/40 leading-relaxed max-w-[340px]"
-            >
-              {MENU_CONFIG.tagline}
-            </motion.div>
-
-            {activeCards.length > 0 && (
-              <motion.div
-                custom={1}
-                variants={fadeUpVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="flex flex-col gap-4"
-              >
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/30 hidden lg:block">
-                  CURATED DISPATCHES
-                </div>
-                {/* Horizontal Snap on Mobile, Stacked on Desktop */}
-                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 lg:pb-0">
-                  {activeCards.map((card, i) => (
-                    <MenuContentCard
-                      key={i}
-                      card={card}
-                      onNavigate={onClose}
-                      reduceMotion={reduceMotion}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full max-h-full min-h-0">
+          {/* Cols 1-5: Preview Panel (>=1024px and height >= 600px only) */}
+          <motion.div
+            custom={0}
+            variants={fadeUpVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className="hidden lg:flex flex-col justify-center h-full max-h-full min-h-0 col-span-5 max-w-[420px]"
+          >
+            <div className="relative w-full aspect-[4/5] max-h-[calc(100svh-220px)] rounded-[12px] overflow-hidden bg-white/[0.05]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activePreview.index}
+                  initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.3, ease: EASE_CUBIC }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  {activePreview.image ? (
+                    <Image
+                      src={activePreview.image}
+                      alt={activePreview.caption}
+                      fill
+                      sizes="(max-width: 1200px) 380px, 420px"
+                      className="object-cover"
                     />
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </div>
+                  ) : (
+                    <div className="w-full h-full bg-white/[0.05]" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-          {/* Right Column (Cols 6-12 on Desktop): Huge Editorial Links */}
-          <div className="order-1 lg:order-2 lg:col-span-7 lg:col-start-6 flex flex-col justify-center">
+            {/* Preview Caption + Mono Index */}
+            <div className="flex items-center justify-between pt-3 text-[15px] text-white/70">
+              <span className="truncate pr-4">{activePreview.caption}</span>
+              <span className="font-mono text-xs text-white/40 shrink-0">
+                [{activePreview.index}]
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Cols 7-12: The Stacked Links */}
+          <div className="col-span-12 lg:col-span-6 lg:col-start-7 flex flex-col justify-center h-full">
             <nav
-              aria-label="Primary"
-              className="group/links flex flex-col gap-2 lg:gap-3"
+              aria-label="Primary Navigation"
+              className="flex flex-col gap-0 select-none [&:has(a:hover,a:focus-visible)_a]:opacity-35 [&:has(a:hover,a:focus-visible)_a:hover]:!opacity-100 [&:has(a:hover,a:focus-visible)_a:focus-visible]:!opacity-100 [@media(hover:none)]:!opacity-100"
             >
               {MENU_CONFIG.links.map((link, idx) => {
                 const isActive = pathname === link.href;
 
                 return (
-                  <div key={link.href} className="overflow-hidden">
-                    <motion.div
-                      custom={idx}
-                      variants={linkMaskVariants}
-                      initial="closed"
-                      animate="open"
-                      exit="closed"
-                    >
-                      {link.soon ? (
-                        <div className="group/item inline-flex items-baseline gap-3 text-white/30 select-none py-1">
-                          <span className="text-[13px] font-mono text-white/30 tracking-widest">
-                            {link.index}
-                          </span>
-                          <span className="text-[clamp(2.75rem,8vw,7.5rem)] font-medium tracking-[-0.04em] leading-[0.95] text-white/25">
+                  <div key={link.href} className="relative py-0 leading-none">
+                    {link.soon ? (
+                      /* "Soon" Link: non-interactive, white/30, plain 13px label at top-right */
+                      <div
+                        aria-disabled="true"
+                        className="inline-grid grid-cols-[auto_1fr_auto] items-start gap-3 py-1 text-white/30 select-none cursor-default"
+                      >
+                        <span className="font-mono text-[13px] text-white/20 pt-2 lg:pt-3 leading-none">
+                          {link.index}
+                        </span>
+                        <span className="text-[clamp(2.5rem,min(8vw,11.5vh),8rem)] font-medium tracking-[-0.04em] leading-[1] text-white/30">
+                          {link.label}
+                        </span>
+                        <span className="text-[13px] text-white/45 pl-2 pt-2 lg:pt-3 leading-none self-start">
+                          Soon
+                        </span>
+                      </div>
+                    ) : (
+                      /* Active Navigation Link */
+                      <Link
+                        href={link.href}
+                        onClick={onClose}
+                        onMouseEnter={() => setActiveItem(link)}
+                        onMouseLeave={() => setActiveItem(null)}
+                        onFocus={() => setActiveItem(link)}
+                        onBlur={() => setActiveItem(null)}
+                        className={`inline-grid grid-cols-[auto_1fr] items-start gap-3 py-1 outline-none text-white transition-[opacity,transform] duration-300 ease-out focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-4 rounded-sm ${
+                          reduceMotion
+                            ? ""
+                            : "hover:translate-x-4 focus-visible:translate-x-4 [@media(hover:none)]:!translate-x-0"
+                        }`}
+                      >
+                        <span className="font-mono text-[13px] text-white/40 pt-2 lg:pt-3 leading-none">
+                          {link.index}
+                        </span>
+
+                        {/* Link Word with Mask Reveal */}
+                        <div className="relative overflow-hidden leading-[1]">
+                          <motion.span
+                            custom={idx}
+                            variants={linkMaskVariants}
+                            initial="closed"
+                            animate="open"
+                            exit="closed"
+                            className="block text-[clamp(2.5rem,min(8vw,11.5vh),8rem)] font-medium tracking-[-0.04em] leading-[1] text-white"
+                          >
                             {link.label}
-                          </span>
-                          <span className="text-[10px] font-mono tracking-widest text-[#93c5fd]/70 px-2 py-0.5 rounded border border-[#93c5fd]/30 uppercase ml-2">
-                            SOON
-                          </span>
+                          </motion.span>
+
+                          {/* Current Route Underline: 1px #93c5fd, 6px below baseline, grows from left */}
+                          {isActive && (
+                            <motion.span
+                              aria-hidden="true"
+                              initial={reduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
+                              animate={{ scaleX: 1 }}
+                              transition={{
+                                duration: reduceMotion ? 0 : 0.5,
+                                delay: reduceMotion ? 0 : 0.35,
+                                ease: EASE_CUBIC,
+                              }}
+                              style={{ originX: 0 }}
+                              className="absolute left-0 bottom-0 w-full h-[1px] bg-[#93c5fd]"
+                            />
+                          )}
                         </div>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          onClick={onClose}
-                          className={`group/item inline-flex items-baseline gap-3 py-1 outline-none transition-all duration-300 group-hover/links:opacity-35 hover:!opacity-100 focus-visible:!opacity-100 ${
-                            reduceMotion
-                              ? ""
-                              : "hover:translate-x-4 focus-visible:translate-x-4"
-                          }`}
-                        >
-                          <span className="text-[13px] font-mono text-white/40 tracking-widest group-hover/item:text-white/70 transition-colors">
-                            {link.index}
-                          </span>
-                          <span className="relative text-[clamp(2.75rem,8vw,7.5rem)] font-medium tracking-[-0.04em] leading-[0.95] text-white">
-                            {link.label}
-                            {isActive && (
-                              <span
-                                aria-hidden="true"
-                                className="absolute left-0 -bottom-1 w-full h-[1px] bg-[#93c5fd]"
-                              />
-                            )}
-                          </span>
-                        </Link>
-                      )}
-                    </motion.div>
+                      </Link>
+                    )}
                   </div>
                 );
               })}
             </nav>
-
-            {/* Secondary Text Links */}
-            {MENU_CONFIG.secondaryLinks.length > 0 && (
-              <motion.div
-                custom={MENU_CONFIG.links.length}
-                variants={fadeUpVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="flex flex-wrap items-center gap-x-8 gap-y-2 pt-8 mt-6 border-t border-white/10"
-              >
-                {MENU_CONFIG.secondaryLinks.map((sec, i) => (
-                  <Link
-                    key={i}
-                    href={sec.href}
-                    onClick={onClose}
-                    className="text-[15px] text-white/60 hover:text-white transition-colors duration-200 outline-none focus-visible:text-[#93c5fd]"
-                  >
-                    {sec.label}
-                  </Link>
-                ))}
-              </motion.div>
-            )}
-
-            {/* Social Links Row */}
-            {activeSocials.length > 0 && (
-              <motion.div
-                custom={MENU_CONFIG.links.length + 1}
-                variants={fadeUpVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="flex items-center gap-3 pt-6"
-              >
-                {activeSocials.map((social, i) => (
-                  <a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-11 h-11 flex items-center justify-center rounded-full bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.1] transition-all duration-200 outline-none focus-visible:ring-1 focus-visible:ring-[#93c5fd]"
-                  >
-                    <SocialIcon platform={social.platform} />
-                  </a>
-                ))}
-              </motion.div>
-            )}
           </div>
         </div>
-      </div>
+      </main>
+
+      {/* Row 3: Footer (Pinned to bottom, auto height, 1px white/10 top line) */}
+      <footer
+        style={{
+          paddingLeft: NAV_INSET,
+          paddingRight: NAV_INSET,
+        }}
+        className="w-full shrink-0 border-t border-white/10 bg-neutral-950/80 backdrop-blur-md"
+      >
+        <motion.div
+          custom={1}
+          variants={fadeUpVariants}
+          initial="closed"
+          animate="open"
+          exit="closed"
+          className="w-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 py-4 lg:py-4"
+        >
+          {/* Left: Tabler Social Icons (20px, white/60, 44px hit area) */}
+          <div className="flex items-center gap-2">
+            {activeSocials.map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="w-11 h-11 flex items-center justify-center rounded-full text-white/60 hover:text-white transition-colors duration-200 outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2"
+              >
+                <SocialIcon platform={social.platform} />
+              </a>
+            ))}
+          </div>
+
+          {/* Center: Secondary Text Links (15px white/60, hover white) */}
+          {MENU_CONFIG.secondaryLinks.length > 0 && (
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+              {MENU_CONFIG.secondaryLinks.map((sec, i) => (
+                <Link
+                  key={i}
+                  href={sec.href}
+                  onClick={onClose}
+                  className="text-[15px] text-white/60 hover:text-white transition-colors duration-200 outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2"
+                >
+                  {sec.label}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Right: Brand Tagline (13px sentence-case text, white/45) */}
+          <div className="text-[13px] text-white/45 text-center md:text-right font-normal">
+            {MENU_CONFIG.tagline}
+          </div>
+        </motion.div>
+      </footer>
     </motion.div>
   );
 }
