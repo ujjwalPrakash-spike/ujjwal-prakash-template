@@ -215,7 +215,7 @@ export function FullscreenMenu({
           paddingLeft: NAV_INSET,
           paddingRight: NAV_INSET,
         }}
-        className="w-full max-w-[1920px] mx-auto min-h-0 h-full flex flex-col justify-center py-4 lg:py-6"
+        className="w-full max-w-[1920px] mx-auto min-h-0 h-full flex flex-col justify-center pt-2 pb-8 lg:pb-12"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center h-full max-h-full min-h-0 w-full">
           {/* Cols 1-5: Preview Panel (>=1024px and height >= 600px only) */}
@@ -227,7 +227,7 @@ export function FullscreenMenu({
             exit="closed"
             className="hidden lg:flex flex-col justify-center h-full max-h-full min-h-0 col-span-5 w-full"
           >
-            <div className="relative w-full aspect-[4/5] max-h-[calc(100svh-210px)] rounded-[12px] overflow-hidden bg-white/[0.05]">
+            <div className="relative w-full aspect-[4/5] max-h-[calc(100svh-260px)] rounded-[12px] overflow-hidden bg-white/[0.05]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activePreview.index}
@@ -281,7 +281,7 @@ export function FullscreenMenu({
                         <span className="font-mono text-[13px] text-white/20 pt-2 lg:pt-3 leading-none">
                           {link.index}
                         </span>
-                        <span className="text-[clamp(2.5rem,min(8vw,11.5vh),8rem)] font-medium tracking-[-0.04em] leading-[1] text-white/30">
+                        <span className="text-[clamp(2.25rem,min(7.5vw,9.5vh),7.5rem)] font-medium tracking-[-0.04em] leading-[1] text-white/30">
                           {link.label}
                         </span>
                         <span className="text-[13px] text-white/45 pl-2 pt-2 lg:pt-3 leading-none self-start">
@@ -315,7 +315,7 @@ export function FullscreenMenu({
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="block text-[clamp(2.5rem,min(8vw,11.5vh),8rem)] font-medium tracking-[-0.04em] leading-[1] text-white"
+                            className="block text-[clamp(2.25rem,min(7.5vw,9.5vh),7.5rem)] font-medium tracking-[-0.04em] leading-[1] text-white"
                           >
                             {link.label}
                           </motion.span>
@@ -360,7 +360,7 @@ export function FullscreenMenu({
           initial="closed"
           animate="open"
           exit="closed"
-          className="w-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 py-4 lg:py-4"
+          className="w-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 py-5 lg:py-6"
         >
           {/* Left: Tabler Social Icons (20px, white/60, 44px hit area) */}
           <div className="flex items-center gap-2">
