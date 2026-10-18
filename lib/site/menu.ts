@@ -1,11 +1,13 @@
-// Fullscreen menu configuration: brand metadata, primary navigation links,
-// secondary links, social profiles, and editorial preview cards.
+// Fullscreen menu configuration: brand metadata, navigation links with
+// image preview metadata, secondary links, and social profiles.
 
 export interface MenuLink {
   index: string;
   label: string;
   href: string;
   soon?: boolean;
+  image?: string;
+  caption: string;
 }
 
 export interface MenuSecondaryLink {
@@ -19,39 +21,72 @@ export interface MenuSocial {
   href: string;
 }
 
-export interface MenuCard {
-  kind: "drop" | "news";
-  eyebrow: string;
-  title: string;
-  description?: string;
-  date?: string;
-  href: string;
-  image?: string;
-  aspectRatio?: "4:5" | "1:1" | "16:9";
-  roleLabel?: string;
-}
-
 export interface MenuConfig {
   brandName: string;
   wordmark: string;
   tagline: string;
+  defaultPreview: {
+    image?: string;
+    caption: string;
+    index: string;
+  };
   links: MenuLink[];
   secondaryLinks: MenuSecondaryLink[];
   socials: MenuSocial[];
-  cards: MenuCard[];
 }
 
 export const MENU_CONFIG: MenuConfig = {
   brandName: "Apex Atelier",
   wordmark: "APEX.WORKS",
-  tagline: "ARCHITECTURAL GEAR & BESPOKE FABRICATION // 2026",
+  tagline: "Architectural gear & bespoke fabrication · 2026",
+  defaultPreview: {
+    image: undefined,
+    caption: "Latest drop: Modular tactical shell in Cordura® 3L",
+    index: "01",
+  },
   links: [
-    { index: "01", label: "About", href: "/about" },
-    { index: "02", label: "Team", href: "/team" },
-    { index: "03", label: "Merch", href: "/merch" },
-    { index: "04", label: "News", href: "/news" },
-    { index: "05", label: "Gallery", href: "/gallery", soon: true },
-    { index: "06", label: "Contact", href: "/contact" },
+    {
+      index: "01",
+      label: "About",
+      href: "/about",
+      image: undefined,
+      caption: "Studio methodology and architectural fabrication",
+    },
+    {
+      index: "02",
+      label: "Team",
+      href: "/team",
+      image: undefined,
+      caption: "Core engineering & material research collective",
+    },
+    {
+      index: "03",
+      label: "Merch",
+      href: "/merch",
+      image: undefined,
+      caption: "Limited production hardware and technical garments",
+    },
+    {
+      index: "04",
+      label: "News",
+      href: "/news",
+      image: undefined,
+      caption: "Field dispatches and seasonal material trials",
+    },
+    {
+      index: "05",
+      label: "Gallery",
+      href: "/gallery",
+      soon: true,
+      caption: "Exhibition archives and physical installations",
+    },
+    {
+      index: "06",
+      label: "Contact",
+      href: "/contact",
+      image: undefined,
+      caption: "Bespoke commissions and project inquiries",
+    },
   ],
   secondaryLinks: [
     { label: "Shipping & Sizing", href: "/merch" },
@@ -62,25 +97,5 @@ export const MENU_CONFIG: MenuConfig = {
     { platform: "x", label: "X / Twitter", href: "https://x.com" },
     { platform: "instagram", label: "Instagram", href: "https://instagram.com" },
     { platform: "github", label: "GitHub", href: "https://github.com" },
-  ],
-  cards: [
-    {
-      kind: "drop",
-      eyebrow: "LATEST DROP",
-      title: "Tactical Shell 01",
-      description: "Waterproof Cordura® 3-layer laminated weave with magnetic modular fasteners.",
-      href: "/merch",
-      aspectRatio: "16:9",
-      roleLabel: "Drop // 01",
-    },
-    {
-      kind: "news",
-      eyebrow: "DISPATCH",
-      title: "Autumn Capsule Fabrication Log",
-      date: "OCTOBER 2026",
-      href: "/news",
-      aspectRatio: "16:9",
-      roleLabel: "Notes // 04",
-    },
   ],
 };
