@@ -11,12 +11,14 @@ export interface NavbarProps {
   tone?: "light" | "dark";
   variant?: "default" | "bar";
   stickyScrolled?: boolean;
+  transparent?: boolean;
 }
 
 export function Navbar({
   tone = "dark",
   variant = "bar",
   stickyScrolled = false,
+  transparent = false,
 }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -27,16 +29,16 @@ export function Navbar({
 
   // When variant === "bar" (the minimal bar for the template)
   if (isBar) {
+    const isSolid = !transparent || isScrolled;
+
     return (
       <>
         <header
           className={`fixed top-0 left-0 right-0 w-full z-[110] transition-all ${
-            isScrolled
-              ? "h-14 bg-neutral-950/80 backdrop-blur-md border-b border-white/10"
-              : isMenuOpen
-              ? "h-16 bg-neutral-950/40 backdrop-blur-sm"
-              : "h-16 bg-transparent border-b border-transparent"
-          }`}
+            isSolid
+              ? "bg-neutral-950/95 backdrop-blur-md border-b border-white/10"
+              : "bg-transparent border-b border-transparent"
+          } ${isScrolled ? "h-14" : "h-16"}`}
           style={{
             transitionDuration: shouldReduceMotion ? "0ms" : "250ms",
           }}
