@@ -8,6 +8,70 @@ export interface TeamMember {
   linkedin?: string;
 }
 
+export interface CarSpec {
+  model: string;
+  chassis: string;
+  engine: string;
+  power: string;
+  weight: string;
+  transmission: string;
+  image: string;
+  category: string;
+}
+
+export interface FactoryDriver {
+  number: string;
+  name: string;
+  role: string;
+  nationality: string;
+  license: string;
+  careerHighlights: string[];
+  bio: string;
+  email?: string;
+}
+
+export const CAR_SPEC: CarSpec = {
+  model: "Mercedes-AMG GT3",
+  chassis: "Spec 044 // Spaceframe Aluminium & Carbon",
+  engine: "6.2L Naturally Aspirated V8",
+  power: "550 BHP @ 6,480 RPM",
+  weight: "1,285 KG (BOP)",
+  transmission: "6-Speed Sequential Pneumatic Transaxle",
+  image: "/images/team/mercedes-amg-gt3.png",
+  category: "FIA GT3 Homologation // 24H Endurance",
+};
+
+export const FACTORY_DRIVERS: FactoryDriver[] = [
+  {
+    number: "77",
+    name: "Marcus Vance",
+    role: "Lead Factory Pilot & Calibration Driver",
+    nationality: "United Kingdom",
+    license: "FIA Platinum",
+    careerHighlights: [
+      "Overall Winner · 24 Hours of Spa",
+      "GTD Pro Champion · 12H Sebring",
+      "Lead Aero Test Pilot · Mercedes-AMG GT3 Programme",
+    ],
+    bio: "Over a decade at the vanguard of GT endurance racing. Marcus anchors vehicle feedback for suspension damping, high-speed balance, and race setup.",
+    email: "m.vance@apexworks.io",
+  },
+  {
+    number: "88",
+    name: "Elena Rostova",
+    role: "Pro Factory Co-Driver & Aero Development Pilot",
+    nationality: "Germany",
+    license: "FIA Gold",
+    careerHighlights: [
+      "Pole Position · Nürburgring 24 Hours (SP9)",
+      "Vice-Champion · GT World Challenge Europe",
+      "Lead Simulation & High-G Telemetry Driver",
+    ],
+    bio: "Combining deep computational fluid dynamics expertise with razor-sharp racing pedigree, Elena connects wind-tunnel simulations directly with on-track limit handling.",
+    email: "e.rostova@apexworks.io",
+  },
+];
+
 export const PRINCIPALS: TeamMember[] = [
   {
     name: "Alexander Vance",

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { TeamHero } from "@/components/features/team/TeamHero";
-import { TeamPage } from "@/components/features/team/TeamPage";
+import { TeamHero, CarDriverStage, TeamPage } from "@/components/features/team";
 
 export const metadata: Metadata = {
   title: "Team & Roster | APEX.WORKS",
@@ -16,6 +15,7 @@ export default function TeamRoute() {
   return (
     <main className="relative w-full bg-neutral-950 text-white selection:bg-[#93c5fd] selection:text-neutral-950">
       <TeamHero />
+      <CarDriverStage />
       <TeamPage />
     </main>
   );
