@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useScrolled } from "@/hooks/useScrolled";
 import { SegmentedControl, type SegmentOption } from "@/components/shared/ui/SegmentedControl";
 import { NAV_INSET } from "@/lib/tokens";
 import type { YearOption, SeriesOption } from "@/lib/gallery/utils";
@@ -25,6 +26,8 @@ export function GalleryFilterBar({
   onSeriesChange,
   filteredCount,
 }: GalleryFilterBarProps) {
+  const isScrolled = useScrolled(24);
+
   // Sync filters to URL via history.replaceState without full reload
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -53,12 +56,12 @@ export function GalleryFilterBar({
   return (
     <div
       style={{
-        paddingLeft: NAV_INSET,
-        paddingRight: NAV_INSET,
+        top: isScrolled ? 56 : 64,
+        paddingInline: NAV_INSET,
       }}
-      className="sticky top-14 sm:top-16 z-30 w-full bg-neutral-950/90 backdrop-blur-md border-b border-white/10 py-3 transition-colors select-none"
+      className="sticky z-40 w-full bg-neutral-950/98 backdrop-blur-md border-b border-white/10 py-3 transition-[top] duration-250 select-none"
     >
-      <div className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="w-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         {/* Left: Year Segmented Control + Series Plain Text Chips */}
         <div className="flex flex-wrap items-center gap-4 sm:gap-6 w-full md:w-auto">
           {/* Year Segmented Control */}
