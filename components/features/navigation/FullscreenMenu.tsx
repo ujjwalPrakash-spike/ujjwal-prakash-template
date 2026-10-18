@@ -15,7 +15,9 @@ import {
   IconBrandX,
   IconBrandInstagram,
   IconBrandLinkedin,
+  IconX,
 } from "@tabler/icons-react";
+import { LogoBadge } from "@/components/ui/LogoBadge";
 import { MENU_CONFIG, MenuLink } from "@/lib/site/menu";
 import { NAV_INSET } from "@/lib/tokens";
 
@@ -174,12 +176,40 @@ export function FullscreenMenu({
       initial="closed"
       animate="open"
       exit="closed"
-      className="fixed inset-0 z-[100] w-full h-[100svh] bg-neutral-950 text-white grid grid-rows-[64px_1fr_auto] overflow-hidden lg:overflow-hidden max-lg:overflow-y-auto max-h-[100svh] [overscroll-behavior:contain] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden selection:bg-[#93c5fd] selection:text-neutral-950"
+      className="fixed inset-0 z-[120] w-full h-[100svh] bg-neutral-950 text-white grid grid-rows-[64px_1fr_auto] overflow-hidden lg:overflow-hidden max-lg:overflow-y-auto max-h-[100svh] [overscroll-behavior:contain] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden selection:bg-[#93c5fd] selection:text-neutral-950"
     >
-      {/* Row 1: 64px Spacer aligned with Bar Navbar */}
-      <div className="w-full h-16 shrink-0 pointer-events-none" aria-hidden="true" />
+      {/* Row 1: Unified Header (Logo + Close X Button) */}
+      <header
+        style={{
+          paddingLeft: NAV_INSET,
+          paddingRight: NAV_INSET,
+        }}
+        className="w-full max-w-[1920px] mx-auto h-16 shrink-0 flex items-center justify-between"
+      >
+        {/* Left: Brand Monogram + Wordmark */}
+        <div className="flex items-center gap-2.5">
+          <LogoBadge
+            onClick={onClose}
+          />
+        </div>
 
-      {/* Row 2: Main Area (Height-aware, 12-columns, vertically centered) */}
+        {/* Right: Close Button */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close navigation menu"
+          className="group inline-flex items-center gap-3 min-h-[44px] min-w-[44px] px-2 py-2 rounded-full text-white hover:opacity-85 focus:outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] focus-visible:outline-offset-2 transition-all cursor-pointer select-none"
+        >
+          <span className="hidden md:inline-block text-[13px] font-mono uppercase tracking-[0.12em] text-white/80 group-hover:text-white transition-colors">
+            Close
+          </span>
+          <div className="w-11 h-11 relative flex items-center justify-center pointer-events-none">
+            <IconX size={20} stroke={1.5} />
+          </div>
+        </button>
+      </header>
+
+      {/* Row 2: Main Area (Height-aware, balanced 12-columns, vertically centered) */}
       <main
         style={{
           paddingLeft: NAV_INSET,
@@ -187,7 +217,7 @@ export function FullscreenMenu({
         }}
         className="w-full max-w-[1920px] mx-auto min-h-0 h-full flex flex-col justify-center py-4 lg:py-6"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full max-h-full min-h-0">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center h-full max-h-full min-h-0 w-full">
           {/* Cols 1-5: Preview Panel (>=1024px and height >= 600px only) */}
           <motion.div
             custom={0}
@@ -195,9 +225,9 @@ export function FullscreenMenu({
             initial="closed"
             animate="open"
             exit="closed"
-            className="hidden lg:flex flex-col justify-center h-full max-h-full min-h-0 col-span-5 max-w-[420px]"
+            className="hidden lg:flex flex-col justify-center h-full max-h-full min-h-0 col-span-5 w-full"
           >
-            <div className="relative w-full aspect-[4/5] max-h-[calc(100svh-220px)] rounded-[12px] overflow-hidden bg-white/[0.05]">
+            <div className="relative w-full aspect-[4/5] max-h-[calc(100svh-210px)] rounded-[12px] overflow-hidden bg-white/[0.05]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activePreview.index}
@@ -212,7 +242,7 @@ export function FullscreenMenu({
                       src={activePreview.image}
                       alt={activePreview.caption}
                       fill
-                      sizes="(max-width: 1200px) 380px, 420px"
+                      sizes="(max-width: 1200px) 440px, 520px"
                       className="object-cover"
                     />
                   ) : (
@@ -231,8 +261,8 @@ export function FullscreenMenu({
             </div>
           </motion.div>
 
-          {/* Cols 7-12: The Stacked Links */}
-          <div className="col-span-12 lg:col-span-6 lg:col-start-7 flex flex-col justify-center h-full">
+          {/* Cols 6-12: The Stacked Links */}
+          <div className="col-span-12 lg:col-span-7 flex flex-col justify-center h-full">
             <nav
               aria-label="Primary Navigation"
               className="flex flex-col gap-0 select-none [&:has(a:hover,a:focus-visible)_a]:opacity-35 [&:has(a:hover,a:focus-visible)_a:hover]:!opacity-100 [&:has(a:hover,a:focus-visible)_a:focus-visible]:!opacity-100 [@media(hover:none)]:!opacity-100"
