@@ -48,6 +48,7 @@ export function GalleryLightbox({
     if (!isOpen) return;
 
     const originalOverflow = document.body.style.overflow;
+    const triggerEl = triggerRef?.current;
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -83,7 +84,7 @@ export function GalleryLightbox({
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
-      triggerRef?.current?.focus();
+      triggerEl?.focus();
     };
   }, [isOpen, onClose, handlePrev, handleNext, triggerRef]);
 

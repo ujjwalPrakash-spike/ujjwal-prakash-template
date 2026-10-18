@@ -1,7 +1,7 @@
 // Event gallery detail page orchestrator managing photos, deep-linked lightbox, and adjacent navigation.
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Navbar } from "@/components/features/navigation/Navbar";
 import { EventHero } from "./EventHero";
 import { EventPhotos } from "./EventPhotos";
@@ -17,20 +17,22 @@ interface EventPageProps {
 }
 
 export function EventPage({ event }: EventPageProps) {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  // Deep-link check on initial client load: ?photo={n} (1-indexed)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const photoParam = params.get("photo");
-    if (photoParam) {
-      const idx = parseInt(photoParam, 10) - 1;
-      if (!isNaN(idx) && idx >= 0 && idx < event.photos.length) {
-        setLightboxIndex(idx);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const photoParam = params.get("photo");
+      if (photoParam) {
+        const idx = parseInt(photoParam, 10) - 1;
+        if (!isNaN(idx) && idx >= 0 && idx < event.photos.length) {
+          return idx;
+        }
       }
+    } catch {
+      // Safe fallback
     }
-  }, [event.photos.length]);
+    return null;
+  });
 
   const { prev, next } = useMemo(() => getAdjacentEvents(event.slug), [event.slug]);
 

@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
-import { TOKENS, NAV_INSET } from "@/lib/tokens";
+import { NAV_INSET } from "@/lib/tokens";
 import { computeJustifiedRows } from "@/lib/gallery/utils";
 import type { GalleryPhoto, Density } from "@/lib/gallery/types";
 
@@ -24,20 +24,19 @@ export function EventPhotos({ photos, onOpenLightbox }: EventPhotosProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
-  const [density, setDensity] = useState<Density>("M");
-  const [visibleCount, setVisibleCount] = useState<number>(BATCH_SIZE);
-
-  // Restore persisted density from localStorage safely
-  useEffect(() => {
+  const [density, setDensity] = useState<Density>(() => {
+    if (typeof window === "undefined") return "M";
     try {
       const saved = localStorage.getItem("apex_gallery_density") as Density | null;
       if (saved && (saved === "S" || saved === "M" || saved === "L")) {
-        setDensity(saved);
+        return saved;
       }
     } catch {
-      // Storage unavailable or blocked
+      // Safe fallback
     }
-  }, []);
+    return "M";
+  });
+  const [visibleCount, setVisibleCount] = useState<number>(BATCH_SIZE);
 
   const handleDensityChange = (newDensity: Density) => {
     setDensity(newDensity);

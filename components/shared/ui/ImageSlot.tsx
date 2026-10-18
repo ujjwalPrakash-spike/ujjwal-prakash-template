@@ -35,6 +35,7 @@ export function ImageSlot({
   alt = "Catalogue asset slot",
   aspectRatio = "4:5",
   roleLabel = "Product",
+  silent = false,
   priority = false,
   className = "",
   tone = "dark",

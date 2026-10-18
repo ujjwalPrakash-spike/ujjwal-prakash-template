@@ -55,7 +55,7 @@ export function GalleryHero({ stats }: GalleryHeroProps) {
           {statItems.map((item, idx) => (
             <div key={idx} className="flex flex-col gap-1">
               <span className="font-mono text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white tabular-nums">
-                <CountUp end={item.value} />
+                <CountUp value={item.value} />
               </span>
               <span className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-white/50">
                 {item.label}

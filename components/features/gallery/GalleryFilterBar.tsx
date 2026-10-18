@@ -3,7 +3,7 @@
 
 import React, { useEffect } from "react";
 import { SegmentedControl, type SegmentOption } from "@/components/shared/ui/SegmentedControl";
-import { TOKENS, NAV_INSET } from "@/lib/tokens";
+import { NAV_INSET } from "@/lib/tokens";
 import type { YearOption, SeriesOption } from "@/lib/gallery/utils";
 
 interface GalleryFilterBarProps {

@@ -4,7 +4,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowCircle } from "@/components/shared/ui/ArrowCircle";
-import { TOKENS, NAV_INSET } from "@/lib/tokens";
+import { NAV_INSET } from "@/lib/tokens";
 import type { GalleryEvent } from "@/lib/gallery/types";
 
 interface MoreEventsProps {
