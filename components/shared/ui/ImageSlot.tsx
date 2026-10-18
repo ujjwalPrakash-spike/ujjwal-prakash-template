@@ -9,8 +9,9 @@ export interface ImageSlotProps {
   src?: string;
   hoverSrc?: string;
   alt?: string;
-  aspectRatio?: "4:5" | "1:1" | "16:9" | "3:4" | "full";
+  aspectRatio?: "4:5" | "1:1" | "16:9" | "3:4" | "4:3" | "3:2" | "2:3" | "full";
   roleLabel?: string;
+  silent?: boolean;
   priority?: boolean;
   className?: string;
   tone?: "dark" | "light";
@@ -22,6 +23,9 @@ const ratioStyles: Record<string, string> = {
   "1:1": "aspect-square",
   "16:9": "aspect-video",
   "3:4": "aspect-[3/4]",
+  "4:3": "aspect-[4/3]",
+  "3:2": "aspect-[3/2]",
+  "2:3": "aspect-[2/3]",
   full: "w-full h-full min-h-[360px]",
 };
 
@@ -58,6 +62,8 @@ export function ImageSlot({
           sizes={sizes}
           className="object-cover transition-transform duration-700 ease-out hover:scale-105"
         />
+      ) : silent ? (
+        <div className="absolute inset-0 w-full h-full bg-white/[0.08]" />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
           <div
