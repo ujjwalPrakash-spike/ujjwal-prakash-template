@@ -1,26 +1,52 @@
+// Editorial /merch page route: provides SEO metadata, JSON-LD ItemList schema, and renders MerchPage.
 import type { Metadata } from "next";
-import { Navbar } from "@/components/features/navigation/Navbar";
+import { MerchPage } from "@/components/features/merch";
+import { MERCH_CONFIG } from "@/lib/merch/config";
+import { PRODUCTS } from "@/lib/merch/data";
 
 export const metadata: Metadata = {
-  title: "Lookbook & Merch | APEX.WORKS",
-  description: "Limited-run teamwear, trackside capsules, and technical apparel.",
+  title: `${MERCH_CONFIG.title} | APEX.WORKS`,
+  description: MERCH_CONFIG.lead,
+  openGraph: {
+    title: `${MERCH_CONFIG.title} | APEX.WORKS`,
+    description: MERCH_CONFIG.lead,
+    type: "website",
+  },
 };
 
-export default function MerchPage() {
+export default function Page() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: MERCH_CONFIG.title,
+    description: MERCH_CONFIG.lead,
+    numberOfItems: PRODUCTS.length,
+    itemListElement: PRODUCTS.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Product",
+        name: product.name,
+        description: product.description,
+        offers: {
+          "@type": "Offer",
+          price: product.price,
+          priceCurrency: MERCH_CONFIG.currency,
+          availability: product.available
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock",
+        },
+      },
+    })),
+  };
+
   return (
-    <main className="min-h-screen bg-neutral-950 text-white flex flex-col justify-between pt-16">
-      <Navbar tone="dark" variant="bar" />
-      <div className="flex-1 flex flex-col items-center justify-center px-6 text-center py-32">
-        <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#93c5fd] mb-4">
-          COMING SOON // CAPSULE 01
-        </span>
-        <h1 className="text-4xl sm:text-6xl font-medium tracking-tight mb-4">
-          Editorial Merch Lookbook
-        </h1>
-        <p className="text-white/60 max-w-md text-sm sm:text-base">
-          Limited-run technical garments and serialized paddock hardware. Design integration in progress.
-        </p>
-      </div>
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <MerchPage />
+    </>
   );
 }
