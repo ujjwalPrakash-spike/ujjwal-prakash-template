@@ -8,6 +8,10 @@ interface FocusListProps<T> {
   getKey: (item: T) => string;
   renderRow: (item: T, index: number, isActive: boolean) => React.ReactNode;
   renderPanel: (activeItem: T, activeIndex: number, total: number) => React.ReactNode;
+  panelPosition?: "left" | "right";
+  panelSpan?: string;
+  rowsSpan?: string;
+  stickyTop?: string;
   className?: string;
 }
 
@@ -16,6 +20,10 @@ export function FocusList<T>({
   getKey,
   renderRow,
   renderPanel,
+  panelPosition = "left",
+  panelSpan = "lg:col-span-4",
+  rowsSpan = "lg:col-span-8",
+  stickyTop = "top-[144px]",
   className = "",
 }: FocusListProps<T>) {
   const shouldReduceMotion = useReducedMotion();
@@ -61,19 +69,16 @@ export function FocusList<T>({
   return (
     <div className={`relative ${className}`}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left Col 1-4: Sticky Panel at >=1024px */}
-        <div className="hidden lg:block lg:col-span-4 sticky top-[144px] z-10 self-start">
-          <div
-            className={`transition-opacity duration-200 ${
-              shouldReduceMotion ? "opacity-100" : "opacity-100"
-            }`}
-          >
-            {renderPanel(activeItem, activeIndex, items.length)}
+        {panelPosition === "left" && (
+          <div className={`hidden lg:block ${panelSpan} sticky ${stickyTop} z-10 self-start`}>
+            <div className={shouldReduceMotion ? "opacity-100" : "transition-opacity duration-200"}>
+              {renderPanel(activeItem, activeIndex, items.length)}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Right Col 5-12: The Rows */}
-        <div className="lg:col-span-8 flex flex-col">
+        {/* The Rows */}
+        <div className={`${rowsSpan} flex flex-col`}>
           {items.map((item, idx) => {
             const isActive = idx === activeIndex;
             return (
@@ -91,7 +96,7 @@ export function FocusList<T>({
                     ? "opacity-100"
                     : isActive
                     ? "opacity-100"
-                    : "opacity-30 max-lg:opacity-45"
+                    : "opacity-35 max-lg:opacity-100"
                 }`}
               >
                 {renderRow(item, idx, isActive)}
@@ -99,6 +104,14 @@ export function FocusList<T>({
             );
           })}
         </div>
+
+        {panelPosition === "right" && (
+          <div className={`hidden lg:block ${panelSpan} sticky ${stickyTop} z-10 self-start`}>
+            <div className={shouldReduceMotion ? "opacity-100" : "transition-opacity duration-200"}>
+              {renderPanel(activeItem, activeIndex, items.length)}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

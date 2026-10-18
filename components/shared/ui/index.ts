@@ -12,3 +12,5 @@ export { SegmentedControl } from "./SegmentedControl";
 export type { SegmentOption } from "./SegmentedControl";
 export { BlockRenderer } from "./BlockRenderer";
 export { FocusList } from "./FocusList";
+export { ImageSlot } from "./ImageSlot";
+export type { ImageSlotProps } from "./ImageSlot";
