@@ -1,7 +1,7 @@
 // Light band news archive grouped by month with editorial rows, sticky headers, and infinite load.
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowCircle } from "@/components/shared/ui/ArrowCircle";
@@ -14,7 +14,6 @@ interface NewsArchiveProps {
   groups: MonthGroup[];
   totalFiltered: number;
   onClearFilters: () => void;
-  isFiltered: boolean;
 }
 
 const PAGE_SIZE = 12;
@@ -23,25 +22,28 @@ export function NewsArchive({
   groups,
   totalFiltered,
   onClearFilters,
-  isFiltered,
 }: NewsArchiveProps) {
   const [visibleLimit, setVisibleLimit] = useState(PAGE_SIZE);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // Flatten posts across groups up to visibleLimit
-  let countSoFar = 0;
-  const renderedGroups = groups
-    .map((grp) => {
-      if (countSoFar >= visibleLimit) return null;
+  const renderedGroups = useMemo(() => {
+    let countSoFar = 0;
+    const result: MonthGroup[] = [];
+    for (const grp of groups) {
+      if (countSoFar >= visibleLimit) break;
       const available = visibleLimit - countSoFar;
       const sliced = grp.posts.slice(0, available);
-      countSoFar += sliced.length;
-      return {
-        ...grp,
-        posts: sliced,
-      };
-    })
-    .filter((g): g is MonthGroup => g !== null && g.posts.length > 0);
+      if (sliced.length > 0) {
+        countSoFar += sliced.length;
+        result.push({
+          ...grp,
+          posts: sliced,
+        });
+      }
+    }
+    return result;
+  }, [groups, visibleLimit]);
 
   const hasMore = visibleLimit < totalFiltered;
 

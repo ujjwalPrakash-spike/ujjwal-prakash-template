@@ -1,7 +1,7 @@
 // Client orchestrator for /news index route managing filter state, URL synchronization, and component hierarchy.
 "use client";
 
-import React, { useState, useMemo, useEffect, Suspense } from "react";
+import React, { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/features/navigation/Navbar";
 import { NewsHero } from "./NewsHero";
@@ -20,23 +20,18 @@ import {
 function NewsContent() {
   const searchParams = useSearchParams();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedYear, setSelectedYear] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedTag, setSelectedTag] = useState<string>("");
-
-  // Sync initial query params on mount
-  useEffect(() => {
-    const cat = searchParams.get("category");
-    const yr = searchParams.get("year");
-    const q = searchParams.get("q");
-    const tg = searchParams.get("tag");
-
-    if (cat) setSelectedCategory(cat);
-    if (yr) setSelectedYear(yr);
-    if (q) setSearchQuery(q);
-    if (tg) setSelectedTag(tg);
-  }, [searchParams]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    () => searchParams.get("category") || "all"
+  );
+  const [selectedYear, setSelectedYear] = useState<string>(
+    () => searchParams.get("year") || "all"
+  );
+  const [searchQuery, setSearchQuery] = useState<string>(
+    () => searchParams.get("q") || ""
+  );
+  const [selectedTag, setSelectedTag] = useState<string>(
+    () => searchParams.get("tag") || ""
+  );
 
   const categories = useMemo(() => getCategories(NEWS_POSTS), []);
   const years = useMemo(() => getYears(NEWS_POSTS), []);
@@ -138,7 +133,6 @@ function NewsContent() {
         groups={monthGroups}
         totalFiltered={filteredPosts.length}
         onClearFilters={handleClearFilters}
-        isFiltered={isFiltering}
       />
 
       {/* Dark Closing CTA */}
