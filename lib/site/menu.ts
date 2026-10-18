@@ -77,7 +77,6 @@ export const MENU_CONFIG: MenuConfig = {
       index: "05",
       label: "Gallery",
       href: "/gallery",
-      soon: true,
       caption: "Exhibition archives and physical installations",
     },
     {
