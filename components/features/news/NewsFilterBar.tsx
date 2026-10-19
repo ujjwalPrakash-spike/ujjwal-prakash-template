@@ -1,22 +1,21 @@
-// Sticky news filter bar with category toggles, year segmented control, SearchInput, and URL state sync.
+// Streamlined sticky news filter bar with category tabs, search input, and dynamic navbar offset.
 "use client";
 
 import React, { useEffect } from "react";
 import { useScrolled } from "@/hooks/useScrolled";
-import { SegmentedControl, type SegmentOption } from "@/components/shared/ui/SegmentedControl";
 import { SearchInput } from "@/components/shared/ui/SearchInput";
 import { NAV_INSET } from "@/lib/tokens";
 import type { NewsCategoryCount, NewsYearCount } from "@/lib/news/types";
 
 interface NewsFilterBarProps {
   categories: NewsCategoryCount[];
-  years: NewsYearCount[];
+  years?: NewsYearCount[];
   selectedCategory: string;
-  selectedYear: string;
+  selectedYear?: string;
   searchQuery: string;
   selectedTag: string;
   onCategoryChange: (category: string) => void;
-  onYearChange: (year: string) => void;
+  onYearChange?: (year: string) => void;
   onSearchChange: (query: string) => void;
   onTagClear: () => void;
   filteredCount: number;
@@ -24,13 +23,10 @@ interface NewsFilterBarProps {
 
 export function NewsFilterBar({
   categories,
-  years,
   selectedCategory,
-  selectedYear,
   searchQuery,
   selectedTag,
   onCategoryChange,
-  onYearChange,
   onSearchChange,
   onTagClear,
   filteredCount,
@@ -48,12 +44,6 @@ export function NewsFilterBar({
       url.searchParams.delete("category");
     }
 
-    if (selectedYear && selectedYear !== "all") {
-      url.searchParams.set("year", selectedYear);
-    } else {
-      url.searchParams.delete("year");
-    }
-
     if (searchQuery.trim()) {
       url.searchParams.set("q", searchQuery.trim());
     } else {
@@ -67,12 +57,7 @@ export function NewsFilterBar({
     }
 
     window.history.replaceState(null, "", url.toString());
-  }, [selectedCategory, selectedYear, searchQuery, selectedTag]);
-
-  const yearOptions: SegmentOption<string>[] = [
-    { value: "all", label: "All Years" },
-    ...years.map((y) => ({ value: y.year, label: y.year, count: y.count })),
-  ];
+  }, [selectedCategory, searchQuery, selectedTag]);
 
   return (
     <div
@@ -80,19 +65,18 @@ export function NewsFilterBar({
         top: isScrolled ? 56 : 64,
         paddingInline: NAV_INSET,
       }}
-      className="sticky z-40 w-full bg-neutral-950/98 backdrop-blur-md border-b border-white/10 py-3 transition-[top] duration-250 select-none"
+      className="sticky z-40 w-full bg-neutral-950/98 backdrop-blur-md border-b border-white/10 py-2.5 sm:py-3 transition-[top] duration-250 select-none"
     >
-      <div className="w-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        {/* Left: Category Plain Text Toggles + Year Segmented Control */}
-        <div className="flex flex-wrap items-center gap-4 sm:gap-6 w-full md:w-auto">
-          {/* Category Plain Text Toggles (no pills: selected = white with 1px #93c5fd underline, others white/55) */}
-          <div role="tablist" aria-label="Filter by category" className="flex flex-wrap items-center gap-4 sm:gap-6">
+      <div className="w-full max-w-[1920px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        {/* Left: Category Plain Text Toggles */}
+        <div className="flex items-center gap-4 sm:gap-6 w-full md:w-auto overflow-x-auto no-scrollbar py-0.5">
+          <div role="tablist" aria-label="Filter by category" className="flex items-center gap-3 sm:gap-5 shrink-0">
             <button
               type="button"
               role="tab"
               aria-selected={selectedCategory === "all"}
               onClick={() => onCategoryChange("all")}
-              className={`relative py-1 text-xs uppercase tracking-wider font-mono transition-colors cursor-pointer outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] rounded-sm ${
+              className={`relative py-1 text-xs uppercase tracking-wider font-mono transition-colors cursor-pointer outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] rounded-sm whitespace-nowrap ${
                 selectedCategory === "all" ? "text-white font-medium" : "text-white/55 hover:text-white"
               }`}
             >
@@ -111,7 +95,7 @@ export function NewsFilterBar({
                   role="tab"
                   aria-selected={isSelected}
                   onClick={() => onCategoryChange(c.name)}
-                  className={`relative py-1 text-xs uppercase tracking-wider font-mono transition-colors cursor-pointer outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] rounded-sm ${
+                  className={`relative py-1 text-xs uppercase tracking-wider font-mono transition-colors cursor-pointer outline-none focus-visible:outline-2 focus-visible:outline-[#93c5fd] rounded-sm whitespace-nowrap ${
                     isSelected ? "text-white font-medium" : "text-white/55 hover:text-white"
                   }`}
                 >
@@ -126,24 +110,15 @@ export function NewsFilterBar({
             })}
           </div>
 
-          {/* Year Segmented Control */}
-          <SegmentedControl
-            options={yearOptions}
-            value={selectedYear}
-            onChange={onYearChange}
-            tone="dark"
-            ariaLabel="Filter by publication year"
-          />
-
           {/* Active Tag indicator if filtered by tag */}
           {selectedTag && (
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-white/10 rounded-full font-mono text-xs text-white">
-              <span>Tag: #{selectedTag}</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-white/10 rounded-full font-mono text-xs text-white shrink-0">
+              <span>#{selectedTag}</span>
               <button
                 type="button"
                 onClick={onTagClear}
                 aria-label="Remove tag filter"
-                className="text-white/60 hover:text-white text-xs cursor-pointer"
+                className="text-white/60 hover:text-white text-xs cursor-pointer ml-1"
               >
                 ✕
               </button>
@@ -151,26 +126,19 @@ export function NewsFilterBar({
           )}
         </div>
 
-        {/* Right: SearchInput + Result Count */}
-        <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+        {/* Right: SearchInput */}
+        <div className="w-full md:w-56 lg:w-64 shrink-0">
           <SearchInput
             value={searchQuery}
             onChange={onSearchChange}
-            placeholder="Search stories & transcripts..."
-            label="Search stories & transcripts"
+            placeholder="Search stories & dispatches..."
+            label="Search stories"
             tone="dark"
             id="news-search"
             ariaControls="news-archive-results"
-            className="w-full sm:w-64"
+            resultCount={filteredCount}
+            className="w-full"
           />
-
-          <div
-            aria-live="polite"
-            className="shrink-0 font-mono text-xs uppercase tracking-wider text-white/50 whitespace-nowrap"
-          >
-            <span className="text-white tabular-nums">{filteredCount}</span>{" "}
-            {filteredCount === 1 ? "Story" : "Stories"}
-          </div>
         </div>
       </div>
     </div>

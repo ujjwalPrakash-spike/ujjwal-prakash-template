@@ -63,7 +63,7 @@ export function SearchInput({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-controls={ariaControls}
-        className={`h-11 w-full sm:w-72 pl-10 pr-9 rounded-full text-[13px] transition-all focus:outline-none focus:ring-1 ${
+        className={`h-11 w-full pl-10 pr-9 rounded-full text-[13px] transition-all focus:outline-none focus:ring-1 ${
           isDark
             ? "bg-white/5 border border-white/15 text-white placeholder:text-white/40 focus:ring-[#93c5fd]"
             : "bg-neutral-950/5 border border-neutral-950/15 text-neutral-950 placeholder:text-neutral-950/40 focus:ring-neutral-950"

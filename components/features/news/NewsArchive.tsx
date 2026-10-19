@@ -109,9 +109,9 @@ export function NewsArchive({
             {/* Sticky Month Heading (sticks below filter bar and nav) */}
             <div
               style={{
-                top: `${NAV_HEIGHT_SCROLLED + 48}px`,
+                top: "124px",
               }}
-              className="sticky z-20 bg-neutral-50/95 backdrop-blur-sm py-4 border-b border-neutral-950/10 flex items-center justify-between select-none mb-4"
+              className="sticky z-20 bg-neutral-50/98 backdrop-blur-md py-4 border-b border-neutral-950/10 flex items-center justify-between select-none mb-4 scroll-mt-[136px]"
             >
               <h2 className="font-mono text-sm uppercase tracking-widest font-medium text-neutral-950">
                 {group.monthLabel}

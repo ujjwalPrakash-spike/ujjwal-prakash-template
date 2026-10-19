@@ -24,7 +24,7 @@ export function MerchProductIndex({
   const [slowDwell, setSlowDwell] = useState(false);
 
   return (
-    <Section id="catalogue" surface="dark" className="overflow-visible">
+    <Section id="catalogue" surface="dark" className="overflow-visible scroll-mt-[136px]">
       <ChapterHeader
         index="01"
         title="Catalogue & Roster"
