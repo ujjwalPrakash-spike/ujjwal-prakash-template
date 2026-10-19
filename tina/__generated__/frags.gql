@@ -1,0 +1,97 @@
+fragment GlobalParts on Global {
+  __typename
+  brandName
+  wordmark
+  tagline
+  contactEmail
+  contactPhone
+  studioLocations
+}
+
+fragment HeroParts on Hero {
+  __typename
+  eyebrow
+  headlineLine1
+  headlineLine2
+  subcopy
+  backgroundVideo
+  posterImage
+  primaryCtaText
+  primaryCtaHref
+}
+
+fragment CarParts on Car {
+  __typename
+  giantTitle
+  modelName
+  badge
+  description
+  carCutoutImage
+  specs {
+    __typename
+    label
+    value
+    unit
+    detail
+  }
+}
+
+fragment DriversParts on Drivers {
+  __typename
+  name
+  number
+  nationality
+  role
+  image
+  bio
+  stats {
+    __typename
+    label
+    value
+  }
+}
+
+fragment NewsParts on News {
+  __typename
+  title
+  date
+  category
+  excerpt
+  heroImage
+  body
+}
+
+fragment MerchParts on Merch {
+  __typename
+  name
+  price
+  category
+  badge
+  available
+  image
+  hoverImage
+  description
+  specs
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  films {
+    __typename
+    title
+    duration
+    provider
+    videoUrl
+    poster
+    description
+  }
+  photos {
+    __typename
+    title
+    image
+    category
+    caption
+    width
+    height
+  }
+}

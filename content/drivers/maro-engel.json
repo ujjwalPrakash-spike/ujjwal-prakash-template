@@ -1,0 +1,13 @@
+{
+  "name": "Maro Engel",
+  "number": "57",
+  "nationality": "Germany",
+  "role": "Factory Driver",
+  "image": "/images/team/drivers/maro-engel.jpg",
+  "bio": "Mercedes-AMG factory ace, Macau GT World Cup winner, and Nürburgring 24 Hours champion. Brings over fifteen years of international endurance experience to the cockpit.",
+  "stats": [
+    { "label": "Championships", "value": "2" },
+    { "label": "Pole Positions", "value": "19" },
+    { "label": "Podiums", "value": "47" }
+  ]
+}

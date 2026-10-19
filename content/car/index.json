@@ -1,0 +1,33 @@
+{
+  "giantTitle": "AMG GT3",
+  "modelName": "MERCEDES-AMG GT3 EVO",
+  "badge": "HOMOLOGATION GT3 SPEC",
+  "description": "Engineered for uncompromising high-downforce endurance racing. Featuring a handcrafted 6.2-liter naturally aspirated V8, sequential six-speed racing transaxle, and full carbon fiber aerodynamic architecture.",
+  "carCutoutImage": "/images/team/mercedes-amg-gt3.png",
+  "specs": [
+    {
+      "label": "Peak Output",
+      "value": 550,
+      "unit": "HP",
+      "detail": "Naturally aspirated 6.2L AMG V8 engine"
+    },
+    {
+      "label": "Dry Weight",
+      "value": 1285,
+      "unit": "KG",
+      "detail": "FIA homologated carbon-fiber monocoque chassis"
+    },
+    {
+      "label": "Top Velocity",
+      "value": 295,
+      "unit": "KM/H",
+      "detail": "Measured at Circuit Paul Ricard Mistral straight"
+    },
+    {
+      "label": "Downforce",
+      "value": 780,
+      "unit": "KG",
+      "detail": "Active aero balance at 240 km/h terminal speed"
+    }
+  ]
+}

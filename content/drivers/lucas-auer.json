@@ -1,0 +1,13 @@
+{
+  "name": "Lucas Auer",
+  "number": "22",
+  "nationality": "Austria",
+  "role": "Factory Driver",
+  "image": "/images/team/drivers/lucas-auer.jpg",
+  "bio": "Multiple DTM race victor and Daytona 24 Hours pole setter. Celebrated for razor-sharp qualifying pace and aggressive wheel-to-wheel racecraft under pressure.",
+  "stats": [
+    { "label": "Race Victories", "value": "9" },
+    { "label": "Podium Finishes", "value": "23" },
+    { "label": "Fastest Laps", "value": "14" }
+  ]
+}

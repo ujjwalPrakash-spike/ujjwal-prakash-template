@@ -1,0 +1,15 @@
+{
+  "name": "Modular Tactical Shell 01",
+  "price": 420,
+  "category": "Apparel",
+  "badge": "LIMITED RUN",
+  "available": true,
+  "image": "/template/👑.jpeg",
+  "hoverImage": "/template/_ (8).jpeg",
+  "description": "Engineered from 3-layer Cordura ripstop with ultrasonic-welded seam architecture and magnetic quick-release closures.",
+  "specs": [
+    "Grade 5 Titanium Hardware",
+    "20,000mm Hydrostatic Head Rating",
+    "Laser-Perforated Thermal Venting"
+  ]
+}

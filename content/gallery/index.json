@@ -1,0 +1,38 @@
+{
+  "films": [
+    {
+      "title": "Chassis 04 Telemetry Shakedown",
+      "duration": "03:42",
+      "provider": "Vimeo",
+      "videoUrl": "https://vimeo.com/76979871",
+      "poster": "/template/backgroundhero-poster.jpg",
+      "description": "High-speed aerodynamic telemetry capture at Circuit Paul Ricard."
+    },
+    {
+      "title": "Nocturnal Autoclave Curing Process",
+      "duration": "05:18",
+      "provider": "MP4",
+      "videoUrl": "/template/backgroundhero.mp4",
+      "poster": "/template/_ (8).jpeg",
+      "description": "Composite carbon weave autoclave pre-preg curing sequence."
+    }
+  ],
+  "photos": [
+    {
+      "title": "Kinetic Pavilion Monocoque",
+      "image": "/template/backgroundhero-poster.jpg",
+      "category": "Structure",
+      "caption": "Specimen AH-SPEC-01 Aerodynamic Testbed",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Aero Hull Assembly",
+      "image": "/template/_ (8).jpeg",
+      "category": "Kinetics",
+      "caption": "Specimen AH-SPEC-02 Carbon Fiber Weave",
+      "width": 1600,
+      "height": 1200
+    }
+  ]
+}
