@@ -94,6 +94,7 @@ body {
   --header-stack-h: 120px;
   --nav-inset: clamp(20px, 5vw, 80px);
   --accent-blue: #93c5fd;
+  --danger: #FF6B6B;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

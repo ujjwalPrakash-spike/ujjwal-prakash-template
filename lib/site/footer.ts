@@ -46,22 +46,25 @@ export const FOOTER_CONTACT = {
   email: { display: "commissions@apexworks.io", href: "mailto:commissions@apexworks.io" },
 };
 
-export const FOOTER_SOCIAL = [
+import { SOCIAL_LINKS } from "@/config/socials";
+
+export interface FooterSocialItem {
+  label: string;
+  href: string;
+  icon: string;
+  external?: boolean;
+}
+
+export const FOOTER_SOCIAL: FooterSocialItem[] = [
   {
     label: "Email Atelier",
     href: "mailto:commissions@apexworks.io",
-    icon: "mail" as const,
+    icon: "mail",
   },
-  {
-    label: "Instagram",
-    href: "https://instagram.com",
-    icon: "instagram" as const,
+  ...SOCIAL_LINKS.filter((s) => Boolean(s.href)).slice(0, 4).map((s) => ({
+    label: s.label,
+    href: s.href,
+    icon: s.platform,
     external: true,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: "linkedin" as const,
-    external: true,
-  },
+  })),
 ];

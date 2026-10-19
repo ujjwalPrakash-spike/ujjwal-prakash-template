@@ -15,8 +15,10 @@ export interface MenuSecondaryLink {
   href: string;
 }
 
+import { SOCIAL_LINKS } from "@/config/socials";
+
 export interface MenuSocial {
-  platform: "x" | "instagram" | "github" | "linkedin";
+  platform: string;
   label: string;
   href: string;
 }
@@ -93,9 +95,9 @@ export const MENU_CONFIG: MenuConfig = {
     { label: "Terms of Service", href: "#" },
     { label: "Privacy Protocol", href: "#" },
   ],
-  socials: [
-    { platform: "x", label: "X / Twitter", href: "https://x.com" },
-    { platform: "instagram", label: "Instagram", href: "https://instagram.com" },
-    { platform: "github", label: "GitHub", href: "https://github.com" },
-  ],
+  socials: SOCIAL_LINKS.filter((s) => Boolean(s.href)).map((s) => ({
+    platform: s.platform,
+    label: s.label,
+    href: s.href,
+  })),
 };
