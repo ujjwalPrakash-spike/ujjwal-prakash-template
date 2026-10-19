@@ -11,10 +11,10 @@ import { CampusLifeSection } from "@/components/features/about/CampusLifeSection
 import { ABOUT_HERO_CONTENT, ABOUT_SECTIONS } from "@/lib/about/content";
 
 export const metadata: Metadata = {
-  title: "About IIT Kanpur | Students' Placement Office",
+  title: "About | WINWARD RACING · APEX.WORKS",
   description: ABOUT_HERO_CONTENT.subcopy,
   openGraph: {
-    title: "About IIT Kanpur | Students' Placement Office",
+    title: "About | WINWARD RACING · APEX.WORKS",
     description: ABOUT_HERO_CONTENT.subcopy,
     images: [{ url: "/images/about/AboutIITK.jpg", width: 1200, height: 630, alt: "IIT Kanpur Campus" }],
   },

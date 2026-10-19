@@ -110,26 +110,24 @@ export function CampusLifeSection({
         <div className="pt-12 border-t border-neutral-950/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h4 className="text-[22px] sm:text-[26px] font-medium text-neutral-950 tracking-tight">
-              Hiring from IIT Kanpur?
+              Partner with Winward Racing
             </h4>
             <p className="text-[15px] text-neutral-950/60 mt-1">
-              Connect with the Students&apos; Placement Office to coordinate recruitment.
+              Connect with the atelier directorate for team sponsorships and technical commissions.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
-              href="/recruiters/why-iitk"
+              href="/contact"
               className="h-[46px] px-6 rounded-md bg-neutral-950 text-white font-semibold text-sm inline-flex items-center justify-center hover:bg-neutral-800 transition-colors shadow-sm active:scale-95"
             >
-              Recruit with us
+              Initiate a Build
             </Link>
             <Link
-              href="https://placement.iitk.ac.in/login"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/team"
               className="h-[46px] px-6 rounded-md bg-neutral-950/10 backdrop-blur-md border border-neutral-950/20 text-neutral-950 font-semibold text-sm inline-flex items-center justify-center hover:bg-neutral-950/20 transition-colors active:scale-95"
             >
-              Student login
+              View Roster
             </Link>
           </div>
         </div>

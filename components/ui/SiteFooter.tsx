@@ -228,10 +228,10 @@ export function SiteFooter() {
             </div>
             <div>
               <p className="text-[15px] font-medium text-white leading-tight">
-                Students&rsquo; Placement Office, IIT Kanpur
+                WINWARD RACING
               </p>
               <p className="text-[13px] text-white/50 font-normal mt-0.5">
-                &copy; {year} SPO, IIT Kanpur
+                &copy; {year} WINWARD RACING · All rights reserved
               </p>
             </div>
           </div>
@@ -246,8 +246,8 @@ export function SiteFooter() {
               },
               {
                 icon: IconBrandFacebook,
-                href: "https://www.facebook.com/iitkanpur",
-                label: "IIT Kanpur on Facebook",
+                href: "https://www.facebook.com",
+                label: "Winward on Facebook",
                 external: true,
               },
               {
@@ -293,7 +293,7 @@ export function SiteFooter() {
             }}
             className="font-semibold tracking-[-0.05em] leading-[0.8] text-transparent bg-clip-text bg-gradient-to-b from-white/20 to-transparent"
           >
-            SPO IITK
+            WINWARD
           </motion.span>
         </div>
       </div>
