@@ -77,7 +77,7 @@ function IntroPanel() {
         {/* Top row */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-auto">
           <span className="text-[13px] uppercase tracking-[0.12em] text-white/60 font-normal">
-            SPECIFICATIONS // 2026
+            SPECIFICATIONS 2026
           </span>
           <span className="text-[13px] text-white/45">
             OVERVIEW
@@ -210,7 +210,7 @@ export function WhyRecruitHorizontalScroll({ className = "" }: { className?: str
           <li className="min-h-[60svh] flex flex-col px-[clamp(24px,6vw,96px)] pt-[clamp(24px,4vh,48px)] pb-[clamp(24px,5vh,56px)] border-b border-white/10">
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-auto">
               <span className="text-[13px] uppercase tracking-[0.12em] text-white/60 font-normal">
-                SPECIFICATIONS // 2026
+                SPECIFICATIONS 2026
               </span>
               <span className="text-[13px] text-white/45">
                 OVERVIEW

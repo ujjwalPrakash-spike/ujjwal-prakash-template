@@ -13,7 +13,7 @@ export const ABOUT_SECTIONS = [
 ] as const;
 
 export const ABOUT_HERO_CONTENT = {
-  eyebrow: "WINWARD RACING · ATELIER & RESEARCH",
+  eyebrow: "OVERVIEW",
   title: "IIT Kanpur",
   subcopy:
     "The Institute has earned a superb academic reputation globally in its continuous endeavour to achieve excellence in undergraduate and postgraduate education and research.",

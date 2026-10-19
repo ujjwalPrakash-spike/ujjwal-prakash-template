@@ -38,9 +38,9 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
 
 export const FOOTER_CONTACT = {
   lines: [
-    "APEX WORKS // PERFORMANCE ATELIER",
+    "APEX PERFORMANCE ATELIER",
     "High-Performance Digital Architecture",
-    "Zurich · London · Tokyo",
+    "Zurich London Tokyo",
   ],
   phone: { display: "+44 20 7946 0912", href: "tel:+442079460912" },
   email: { display: "commissions@apexworks.io", href: "mailto:commissions@apexworks.io" },

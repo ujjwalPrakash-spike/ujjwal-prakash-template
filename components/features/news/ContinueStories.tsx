@@ -94,7 +94,7 @@ export function ContinueStories({ previous, next, related }: ContinueStoriesProp
         {related.length > 0 && (
           <div className="mb-20">
             <p className="font-mono text-[13px] uppercase tracking-[0.14em] text-white/50 mb-6">
-              RELATED FIELD REPORTS //
+              RELATED FIELD REPORTS
             </p>
             <div className="divide-y divide-white/10 border-t border-b border-white/10">
               {related.map((post) => {

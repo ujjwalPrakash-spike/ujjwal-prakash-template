@@ -67,7 +67,7 @@ export function MerchProductIndex({
                 </div>
                 <div className="flex justify-between items-baseline font-mono text-xs pt-2 border-t border-white/10">
                   <span className="text-[#93c5fd] uppercase tracking-widest">
-                    {activeProduct.category} {"//"} {activeProduct.badge || "CORE SPEC"}
+                    {activeProduct.category} {activeProduct.badge || "CORE SPEC"}
                   </span>
                   <span className="text-white font-medium">
                     {activeProduct.available

@@ -34,7 +34,7 @@ export function TeamHero() {
           transition={{ duration: 0.6, ease: TOKENS.ease }}
           className="text-[13px] uppercase tracking-[0.12em] text-white/50 mb-4"
         >
-          APEX WORKS · THE ROSTER & ATELIER
+          ROSTER
         </motion.p>
 
         <div className="overflow-hidden mb-6">

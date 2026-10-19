@@ -191,7 +191,7 @@ export function BlockRenderer({ blocks, className = "", tone = "light" }: BlockR
                     style={{ aspectRatio: `${block.width} / ${block.height}` }}
                   >
                     <span className={isDark ? "text-white/40" : "text-neutral-950/40"}>
-                      [Figure // {block.alt}]
+                      [Figure {block.alt}]
                     </span>
                   </div>
                 )}

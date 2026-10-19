@@ -51,7 +51,7 @@ export function MerchFeatured({ product, onOpenQuickView }: MerchFeaturedProps) 
                 hoverSrc={product.hoverImage}
                 alt={product.name}
                 aspectRatio="4:5"
-                roleLabel={`Featured // ${product.name}`}
+                roleLabel={product.name}
                 tone="light"
                 priority
               />

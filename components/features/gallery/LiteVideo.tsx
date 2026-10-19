@@ -63,7 +63,7 @@ export function LiteVideo({
           ) : (
             <div className="absolute inset-0 bg-neutral-900 flex items-center justify-center">
               <span className="font-mono text-xs uppercase tracking-widest text-white/40">
-                [FILM POSTER // {film.duration}]
+                [FILM {film.duration}]
               </span>
             </div>
           )}

@@ -154,7 +154,7 @@ export function MerchQuickView({
           </div>
 
           <span className="font-mono text-xs uppercase tracking-widest text-white/40">
-            QUICK VIEW // {product.slug}
+            QUICK VIEW {product.slug}
           </span>
 
           <button
@@ -294,7 +294,7 @@ export function MerchQuickView({
             </a>
           ) : (
             <div className="w-full h-12 bg-white/10 text-white/40 font-mono text-xs uppercase tracking-widest flex items-center justify-center rounded cursor-not-allowed">
-              Sold Out // Archive Continuity
+              Sold Out
             </div>
           )}
         </div>

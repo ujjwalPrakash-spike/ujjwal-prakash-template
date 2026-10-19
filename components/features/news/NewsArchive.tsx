@@ -8,7 +8,7 @@ import { ArrowCircle } from "@/components/shared/ui/ArrowCircle";
 import { EmptyResults } from "@/components/directory/EmptyResults";
 import type { MonthGroup, NewsPost } from "@/lib/news/types";
 import { formatDate } from "@/lib/news/utils";
-import { TOKENS, NAV_HEIGHT_SCROLLED } from "@/lib/tokens";
+import { TOKENS } from "@/lib/tokens";
 
 interface NewsArchiveProps {
   groups: MonthGroup[];

@@ -70,7 +70,7 @@ export function NewsFeatured({ post }: NewsFeaturedProps) {
                 </div>
               ) : (
                 <div className="w-full h-full bg-white/[0.06] flex items-center justify-center font-mono text-xs text-white/40 uppercase tracking-widest">
-                  [FEATURED ASSET // ARCHIVE READY]
+                  [FEATURED ARCHIVE]
                 </div>
               )}
             </div>
@@ -78,7 +78,7 @@ export function NewsFeatured({ post }: NewsFeaturedProps) {
             {/* Cols 9-12: Editorial Text Block */}
             <div className="lg:col-span-4 flex flex-col justify-end">
               <span className="text-[13px] font-mono uppercase tracking-[0.12em] text-white/60 mb-3 block">
-                {post.category} · FEATURED STORY
+                {post.category} FEATURED
               </span>
 
               <h2

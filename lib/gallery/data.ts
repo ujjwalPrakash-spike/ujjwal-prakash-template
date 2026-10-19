@@ -463,7 +463,7 @@ export const GALLERY_EVENTS: GalleryEvent[] = [
         width: 800,
         height: 1200,
         alt: "Specimen serial plate laser engraving",
-        caption: "Specimen AH-SPEC-06 // Apex High-Performance Laboratory",
+        caption: "Specimen AH-SPEC-06 Laboratory",
       },
       {
         width: 1600,

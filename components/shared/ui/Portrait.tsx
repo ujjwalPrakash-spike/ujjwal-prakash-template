@@ -13,6 +13,8 @@ import Image from "next/image";
 import { IconBrandLinkedin } from "@tabler/icons-react";
 import { TOKENS } from "@/lib/tokens";
 
+import { ImageSlot } from "./ImageSlot";
+
 interface PortraitProps {
   name: string;
   photo?: string;
@@ -21,31 +23,27 @@ interface PortraitProps {
 }
 
 export function Portrait({ name, photo, linkedin, className = "" }: PortraitProps) {
-  const initials = name
-    .split(" ")
-    .map((w) => w[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-
   return (
     <div
-      className={`relative w-full aspect-[4/5] bg-neutral-100 overflow-hidden group select-none ${className}`}
+      className={`relative w-full aspect-[4/5] overflow-hidden group select-none ${className}`}
       style={{ borderRadius: TOKENS.radiusPortrait }}
     >
       {photo ? (
         <Image
           src={photo}
-          alt={`${name}, placement coordinator`}
+          alt={`${name}, team member`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
           className="object-cover object-top grayscale contrast-[1.05] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-600 ease-out"
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center font-medium text-3xl text-neutral-400">
-          {initials}
-        </div>
+        <ImageSlot
+          aspectRatio="4:5"
+          tone="light"
+          silent
+          roleLabel="Principal"
+          className="w-full h-full border-0"
+        />
       )}
 
       {linkedin ? (

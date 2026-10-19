@@ -220,18 +220,12 @@ export function SiteFooter() {
           }}
         >
           <div className="flex items-center gap-4">
-            <div className="h-8 max-h-[32px] w-auto shrink-0 flex items-center overflow-hidden">
-              <LogoBadge
-                size="footer"
-                imageClassName="h-8 max-h-[32px] w-auto object-contain brightness-0 invert"
-              />
+            <div className="flex items-center">
+              <LogoBadge size="footer" />
             </div>
-            <div>
-              <p className="text-[15px] font-medium text-white leading-tight">
-                WINWARD RACING
-              </p>
-              <p className="text-[13px] text-white/50 font-normal mt-0.5">
-                &copy; {year} WINWARD RACING · All rights reserved
+            <div className="border-l border-white/15 pl-4">
+              <p className="text-[13px] text-white/50 font-normal">
+                &copy; {year} All rights reserved
               </p>
             </div>
           </div>

@@ -1,3 +1,5 @@
+// Section definitions for the team directory index navigation.
+
 export interface TeamSection {
   id: string;
   title: string;
@@ -5,6 +7,11 @@ export interface TeamSection {
 }
 
 export const TEAM_SECTIONS: TeamSection[] = [
+  {
+    id: "drivers",
+    title: "Drivers",
+    subtitle: "Factory racing pilots commanding high-speed limits.",
+  },
   {
     id: "principals",
     title: "Principals & Directors",

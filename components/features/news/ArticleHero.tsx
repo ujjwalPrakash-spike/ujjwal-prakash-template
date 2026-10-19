@@ -50,7 +50,7 @@ export function ArticleHero({ post }: ArticleHeroProps) {
         <div className="flex flex-col justify-end">
           {/* Category Eyebrow */}
           <span className="text-[13px] font-mono uppercase tracking-[0.14em] text-white/50 mb-4 block">
-            {post.category} {"//"} DISPATCH
+            {post.category} DISPATCH
           </span>
 
           {/* Monumental Article Title */}

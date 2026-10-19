@@ -1,3 +1,5 @@
+// Team roster, car architecture specifications, and factory racing pilots data.
+
 export interface TeamMember {
   name: string;
   email: string;
@@ -8,69 +10,114 @@ export interface TeamMember {
   linkedin?: string;
 }
 
-export interface CarSpec {
-  model: string;
-  chassis: string;
-  engine: string;
-  power: string;
-  weight: string;
-  transmission: string;
-  image: string;
-  category: string;
+export interface CarSpecItem {
+  label: string;
+  value: string;
+  unit?: string;
 }
 
-export interface FactoryDriver {
-  number: string;
+export interface CarData {
+  title: string;
+  line: string;
+  image?: string;
+  imageAlt?: string;
+  specs: CarSpecItem[];
+}
+
+export interface DriverHighlight {
+  label: string;
+  detail: string;
+}
+
+export interface DriverStats {
+  starts: number;
+  wins: number;
+  podiums: number;
+}
+
+export interface DriverData {
+  slug: string;
   name: string;
-  role: string;
+  number: string;
+  class: string;
   nationality: string;
-  license: string;
-  careerHighlights: string[];
+  role: string;
   bio: string;
-  email?: string;
+  image?: string;
+  imageAlt?: string;
+  highlights: DriverHighlight[];
+  stats?: DriverStats;
+  email: string;
 }
 
-export const CAR_SPEC: CarSpec = {
-  model: "Mercedes-AMG GT3",
-  chassis: "Spec 044 // Spaceframe Aluminium & Carbon",
-  engine: "6.2L Naturally Aspirated V8",
-  power: "550 BHP @ 6,480 RPM",
-  weight: "1,285 KG (BOP)",
-  transmission: "6-Speed Sequential Pneumatic Transaxle",
+export const CAR_DATA: CarData = {
+  title: "APEX GT-01",
+  line: "A high-downforce endurance architecture engineered for extreme thermal efficiency and high-speed telemetry research.",
   image: "/images/team/mercedes-amg-gt3.png",
-  category: "FIA GT3 Homologation // 24H Endurance",
+  imageAlt: "APEX GT-01 High-Downforce Prototype Architecture",
+  specs: [
+    { label: "POWER", value: "550", unit: "bhp" },
+    { label: "WEIGHT", value: "1285", unit: "kg" },
+    { label: "TRANSMISSION", value: "6-Speed", unit: "Sequential" },
+    { label: "DISPLACEMENT", value: "4.0", unit: "litres" },
+    { label: "DOWNFORCE", value: "820", unit: "kg" },
+  ],
 };
 
-export const FACTORY_DRIVERS: FactoryDriver[] = [
+// Aliases for backward compatibility
+export const CAR_SPEC = CAR_DATA;
+export type CarSpec = CarData;
+
+export const DRIVERS_DATA: DriverData[] = [
   {
+    slug: "marcus-vance",
     number: "77",
     name: "Marcus Vance",
-    role: "Lead Factory Pilot & Calibration Driver",
+    class: "Factory Pro",
     nationality: "United Kingdom",
-    license: "FIA Platinum",
-    careerHighlights: [
-      "Overall Winner · 24 Hours of Spa",
-      "GTD Pro Champion · 12H Sebring",
-      "Lead Aero Test Pilot · Mercedes-AMG GT3 Programme",
+    role: "Lead Factory Pilot & Calibration Driver",
+    bio: "Over a decade anchoring vehicle feedback for high-speed balance, suspension damping, and multi-stint endurance limits.",
+    image: "/template/_ (8).jpeg",
+    imageAlt: "Marcus Vance, Lead Factory Pilot",
+    highlights: [
+      { label: "Coastline 24 Hours", detail: "Overall Winner (Pro Class)" },
+      { label: "Harbor 12 Hours", detail: "Class Pole & Lap Record" },
+      { label: "Apex Aero Development", detail: "Lead Track Evaluation Pilot" },
     ],
-    bio: "Over a decade at the vanguard of GT endurance racing. Marcus anchors vehicle feedback for suspension damping, high-speed balance, and race setup.",
+    stats: {
+      starts: 48,
+      wins: 14,
+      podiums: 29,
+    },
     email: "m.vance@apexworks.io",
   },
   {
+    slug: "elena-rostova",
     number: "88",
     name: "Elena Rostova",
-    role: "Pro Factory Co-Driver & Aero Development Pilot",
+    class: "Factory Pro",
     nationality: "Germany",
-    license: "FIA Gold",
-    careerHighlights: [
-      "Pole Position · Nürburgring 24 Hours (SP9)",
-      "Vice-Champion · GT World Challenge Europe",
-      "Lead Simulation & High-G Telemetry Driver",
+    role: "Pro Factory Co-Driver & Development Pilot",
+    bio: "Combining computational fluid dynamics expertise with razor-sharp telemetry feedback to bridge wind-tunnel models with on-track limits.",
+    image: "/template/_.jpeg",
+    imageAlt: "Elena Rostova, Pro Factory Co-Driver",
+    highlights: [
+      { label: "Highland 24 Hours", detail: "Overall Pole Position" },
+      { label: "Continental Endurance", detail: "Championship Runner-Up" },
+      { label: "High-G Simulation", detail: "Lead Telemetry Correlation" },
     ],
-    bio: "Combining deep computational fluid dynamics expertise with razor-sharp racing pedigree, Elena connects wind-tunnel simulations directly with on-track limit handling.",
+    stats: {
+      starts: 36,
+      wins: 11,
+      podiums: 22,
+    },
     email: "e.rostova@apexworks.io",
   },
 ];
+
+// Aliases for backward compatibility
+export const FACTORY_DRIVERS = DRIVERS_DATA;
+export type FactoryDriver = DriverData;
 
 export const PRINCIPALS: TeamMember[] = [
   {
@@ -79,7 +126,6 @@ export const PRINCIPALS: TeamMember[] = [
     department: "Executive Directorate",
     email: "a.vance@apexworks.io",
     phone: "+44 20 7946 0912",
-    photo: "/template/_ (8).jpeg",
     linkedin: "https://linkedin.com",
   },
   {
@@ -88,7 +134,6 @@ export const PRINCIPALS: TeamMember[] = [
     department: "Aero Dynamics Lab",
     email: "e.rostova@apexworks.io",
     phone: "+44 20 7946 0913",
-    photo: "/template/_.jpeg",
     linkedin: "https://linkedin.com",
   },
   {
@@ -97,7 +142,6 @@ export const PRINCIPALS: TeamMember[] = [
     department: "Design Atelier",
     email: "m.lindqvist@apexworks.io",
     phone: "+44 20 7946 0914",
-    photo: "/template/👑.jpeg",
     linkedin: "https://linkedin.com",
   },
   {
@@ -106,7 +150,6 @@ export const PRINCIPALS: TeamMember[] = [
     department: "Telemetry & Systems",
     email: "k.takahashi@apexworks.io",
     phone: "+44 20 7946 0915",
-    photo: "/template/_ (9).jpeg",
     linkedin: "https://linkedin.com",
   },
 ];
@@ -174,6 +217,14 @@ export const CREATIVE_ATELIER: TeamMember[] = [
 ];
 
 export const ALL_TEAM_MEMBERS: TeamMember[] = [
+  ...DRIVERS_DATA.map((d) => ({
+    name: d.name,
+    role: d.role,
+    department: "Racing Directorate",
+    email: d.email,
+    phone: "",
+    photo: d.image,
+  })),
   ...PRINCIPALS,
   ...RACE_ENGINEERS,
   ...CREATIVE_ATELIER,

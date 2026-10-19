@@ -266,17 +266,17 @@ export function getMerchStats(products: Product[]) {
 
 export const DETAILS_STRIP_COLUMNS: MerchDetailColumn[] = [
   {
-    index: "01 // ALLOY & FIBER",
+    index: "01 ALLOY & FIBER",
     title: "Aerospace Metallurgy",
     body: "We specify certified raw Grade 5 titanium, Cordura high-tenacity ripstop textiles, and pre-preg autoclave composites sourced from audited technical mills across Japan and Italy.",
   },
   {
-    index: "02 // METRIC TOLERANCE",
+    index: "02 METRIC TOLERANCE",
     title: "Micro-Studio Assembly",
     body: "All pieces are cut, ultrasonic-welded, and hand-finished in limited batch runs with 5-axis CNC machining held to within +/- 0.02mm structural tolerance.",
   },
   {
-    index: "03 // PROTOCOL",
+    index: "03 PROTOCOL",
     title: "Lifecycle Archive",
     body: "Designed for decadal utility in extreme velocity environments. Damaged hardware or worn seams are backed by our permanent restoration protocol.",
   },

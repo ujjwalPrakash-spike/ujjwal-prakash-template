@@ -74,7 +74,7 @@ export function GalleryFilms({
                 {activeFilm.title}
               </span>
               <span className="shrink-0 tracking-wider">
-                DURATION // {activeFilm.duration}
+                DURATION {activeFilm.duration}
               </span>
             </div>
           </div>

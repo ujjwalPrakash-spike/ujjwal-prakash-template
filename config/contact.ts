@@ -50,7 +50,7 @@ export interface ContactConfig {
 
 export const CONTACT_CONFIG: ContactConfig = {
   mockSubmit: true,
-  eyebrow: "COMMISSIONS // INQUIRIES",
+  eyebrow: "INQUIRIES",
   title: "Contact",
   intro:
     "Direct atelier commissions, engineering partner inquiries, and technical consultations. We review every brief within 24 hours.",

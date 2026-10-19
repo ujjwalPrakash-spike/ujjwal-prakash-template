@@ -2,7 +2,7 @@
 import type { MerchConfig } from "./types";
 
 export const MERCH_CONFIG: MerchConfig = {
-  eyebrow: "APEX WORKS · PADDOCK CAPSULE & MERCHANDISE",
+  eyebrow: "COLLECTION",
   title: "Capsule & Lookbook",
   lead: "Technical trackside uniforms, numbered race logistics gear, and limited endurance objects. Precision cut for velocity.",
   currency: "USD",

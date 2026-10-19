@@ -15,10 +15,12 @@ import {
   RACE_ENGINEERS,
   CREATIVE_ATELIER,
   ALL_TEAM_MEMBERS,
+  DRIVERS_DATA,
   getTeamSearchText,
   type TeamMember,
 } from "@/lib/team/members";
 import { TEAM_SECTIONS } from "@/lib/team/sections";
+import { DriversSection } from "./DriversSection";
 
 function TeamDirectorySections() {
   const { query, setQuery, filterList, resultCount, isSearching } = useDirectory<TeamMember>();
@@ -27,12 +29,25 @@ function TeamDirectorySections() {
   const engineers = filterList(RACE_ENGINEERS);
   const creative = filterList(CREATIVE_ATELIER);
 
+  const driversMatch =
+    isSearching && query
+      ? DRIVERS_DATA.some((d) =>
+          `${d.name} ${d.role} ${d.class} ${d.nationality} ${d.number}`
+            .toLowerCase()
+            .includes(query.toLowerCase().trim())
+        )
+      : false;
+
   const indexItems = TEAM_SECTIONS.map((sec) => ({
     id: sec.id,
     label: sec.title,
   }));
 
-  const hasAnyMatches = principals.length > 0 || engineers.length > 0 || creative.length > 0;
+  const hasAnyMatches =
+    principals.length > 0 ||
+    engineers.length > 0 ||
+    creative.length > 0 ||
+    driversMatch;
 
   return (
     <>
@@ -48,6 +63,9 @@ function TeamDirectorySections() {
       />
 
       <div id="team-directory-results">
+        {/* 01. Drivers */}
+        <DriversSection />
+
         {isSearching && !hasAnyMatches ? (
           <Section surface="dark">
             <EmptyResults
@@ -57,10 +75,10 @@ function TeamDirectorySections() {
           </Section>
         ) : null}
 
-        {/* 01. Principals & Directors */}
+        {/* 02. Principals & Directors */}
         <Section id="principals" surface="light">
           <ChapterHeader
-            index="01"
+            index="02"
             title="Principals & Directorate"
             count={`${principals.length} directors`}
             tone="light"
@@ -85,10 +103,10 @@ function TeamDirectorySections() {
           )}
         </Section>
 
-        {/* 02. Engineering & Aerodynamics */}
+        {/* 03. Engineering & Aerodynamics */}
         <Section id="engineering" surface="dark">
           <ChapterHeader
-            index="02"
+            index="03"
             title="Engineering & Aerodynamics"
             count={`${engineers.length} specialists`}
             tone="dark"
@@ -137,10 +155,10 @@ function TeamDirectorySections() {
           )}
         </Section>
 
-        {/* 03. Creative & Brand Atelier */}
+        {/* 04. Creative & Brand Atelier */}
         <Section id="creative" surface="light">
           <ChapterHeader
-            index="03"
+            index="04"
             title="Creative & Brand Atelier"
             count={`${creative.length} designers`}
             tone="light"

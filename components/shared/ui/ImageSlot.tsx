@@ -9,13 +9,15 @@ export interface ImageSlotProps {
   src?: string;
   hoverSrc?: string;
   alt?: string;
-  aspectRatio?: "4:5" | "1:1" | "16:9" | "3:4" | "4:3" | "3:2" | "2:3" | "full";
+  aspectRatio?: "4:5" | "1:1" | "16:9" | "3:4" | "4:3" | "3:2" | "2:3" | "21:7" | "full";
   roleLabel?: string;
   silent?: boolean;
   priority?: boolean;
   className?: string;
   tone?: "dark" | "light";
   sizes?: string;
+  border?: boolean;
+  imageClassName?: string;
 }
 
 const ratioStyles: Record<string, string> = {
@@ -26,6 +28,7 @@ const ratioStyles: Record<string, string> = {
   "4:3": "aspect-[4/3]",
   "3:2": "aspect-[3/2]",
   "2:3": "aspect-[2/3]",
+  "21:7": "aspect-[21/7]",
   full: "w-full h-full min-h-[360px]",
 };
 
@@ -40,10 +43,17 @@ export function ImageSlot({
   className = "",
   tone = "dark",
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px",
+  border = true,
+  imageClassName,
 }: ImageSlotProps) {
   const [isHovered, setIsHovered] = useState(false);
   const activeSrc = isHovered && hoverSrc ? hoverSrc : src;
   const isDark = tone === "dark";
+  const borderClasses = border
+    ? isDark
+      ? "border border-white/10"
+      : "border border-neutral-950/10"
+    : "";
 
   return (
     <div
@@ -51,8 +61,8 @@ export function ImageSlot({
       onMouseLeave={() => setIsHovered(false)}
       style={{ borderRadius: TOKENS.radiusPortrait }}
       className={`relative w-full overflow-hidden select-none transition-colors ${
-        isDark ? "bg-white/[0.06] border border-white/10" : "bg-neutral-950/[0.06] border border-neutral-950/10"
-      } ${ratioStyles[aspectRatio] || "aspect-[4/5]"} ${className}`.trim()}
+        activeSrc ? "" : isDark ? "bg-white/[0.06]" : "bg-neutral-950/[0.06]"
+      } ${borderClasses} ${ratioStyles[aspectRatio] || "aspect-[4/5]"} ${className}`.trim()}
     >
       {activeSrc ? (
         <Image
@@ -61,10 +71,17 @@ export function ImageSlot({
           fill
           priority={priority}
           sizes={sizes}
-          className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+          className={
+            imageClassName ||
+            "object-cover transition-transform duration-700 ease-out hover:scale-105"
+          }
         />
       ) : silent ? (
-        <div className="absolute inset-0 w-full h-full bg-white/[0.08]" />
+        <div
+          className={`absolute inset-0 w-full h-full ${
+            isDark ? "bg-white/[0.06]" : "bg-neutral-950/[0.06]"
+          }`}
+        />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
           <div
@@ -72,7 +89,7 @@ export function ImageSlot({
               isDark ? "text-white/40" : "text-neutral-950/40"
             }`}
           >
-            [{roleLabel} {"//"} {aspectRatio}]
+            [{roleLabel} {aspectRatio}]
           </div>
           <div
             className={`mt-1 text-[9px] font-mono tracking-wider ${

@@ -86,7 +86,7 @@ export function HeroContent() {
           className="font-mono font-semibold tracking-[0.14em] text-white/85 uppercase truncate sm:whitespace-normal"
           style={{ fontSize: "clamp(10px, 1.1vw, 12px)" }}
         >
-          APEX WORKS · BESPOKE DIGITAL ENGINE · 2026 EDITION
+          ATELIER 2026
         </span>
       </motion.div>
 

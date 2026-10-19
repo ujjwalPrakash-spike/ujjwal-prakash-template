@@ -235,7 +235,7 @@ export function GalleryLightbox({
                 ) : (
                   <div className="w-full max-w-xl aspect-[4/3] bg-white/[0.06] rounded-xl flex items-center justify-center border border-white/10">
                     <span className="font-mono text-xs uppercase tracking-widest text-white/40">
-                      [ARCHIVE PHOTOGRAPH // {currentPhoto.width}x{currentPhoto.height}]
+                      [PHOTOGRAPH {currentPhoto.width}x{currentPhoto.height}]
                     </span>
                   </div>
                 )}

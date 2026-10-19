@@ -1,7 +1,7 @@
 // Gallery global configuration and brand constants.
 
 export const GALLERY_CONFIG = {
-  eyebrow: "EXHIBITION ARCHIVE // 2025–2026",
+  eyebrow: "ARCHIVE",
   title: "Gallery",
   subtitle:
     "Curated archival index of spatial installations, kinetic research prototypes, and carbon composite fabrication from the APEX atelier.",

@@ -20,7 +20,7 @@ export function NewsClosing() {
     >
       <div className="w-full max-w-[1440px] mx-auto">
         <p className="font-mono text-[13px] uppercase tracking-[0.14em] text-white/50 mb-6">
-          DISPATCH PROTOCOL // ACCESS
+          DISPATCH PROTOCOL
         </p>
 
         <h2

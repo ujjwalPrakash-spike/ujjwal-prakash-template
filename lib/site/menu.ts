@@ -38,9 +38,9 @@ export interface MenuConfig {
 }
 
 export const MENU_CONFIG: MenuConfig = {
-  brandName: "Apex Atelier",
-  wordmark: "APEX.WORKS",
-  tagline: "Architectural gear & bespoke fabrication · 2026",
+  brandName: "Ujjwal Prakash",
+  wordmark: "UJJWAL PRAKASH",
+  tagline: "Architectural gear & bespoke fabrication 2026",
   defaultPreview: {
     image: "/template/_ (8).jpeg",
     caption: "Latest drop: Modular tactical shell in Cordura® 3L",
