@@ -3,7 +3,7 @@ import { defineConfig } from "tinacms";
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 dotenv.config();
-var branch = process.env.NEXT_PUBLIC_TINA_BRANCH || process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || process.env.HEAD || "final-polishing";
+var branch = process.env.NEXT_PUBLIC_TINA_BRANCH || process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "cc01855d-c4b0-4c14-9b75-360527291439",

@@ -8,7 +8,7 @@ const branch =
   process.env.NEXT_PUBLIC_TINA_BRANCH ||
   process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF ||
   process.env.HEAD ||
-  "final-polishing";
+  "main";
 
 export default defineConfig({
   branch,
